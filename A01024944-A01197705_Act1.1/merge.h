@@ -1,4 +1,4 @@
-#ifndef MERGE_H
+/*#ifndef MERGE_H
 #define MERGE_H
 
 
@@ -57,3 +57,5 @@ void mergeSort(vector<double>&array, int start, int end) {
 
 
 #endif // MERGE_H
+
+*/
