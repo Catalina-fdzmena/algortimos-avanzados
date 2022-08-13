@@ -8,8 +8,8 @@ void merge(vector<double>&array, int start, int half, int end) {
     int elementsLeftSide = half - start + 1;
     int elementsRightSide = end - half;
 
-    vector<int> left(elementsLeftSide);
-    vector<int> right(elementsRightSide);
+    vector<double> left(elementsLeftSide);
+    vector<double> right(elementsRightSide);
 
     for(int i = 0; i < elementsLeftSide; i++) {
         left[i] = array[start+i];
