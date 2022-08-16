@@ -60,7 +60,7 @@ void mergeSort(vector<double>&array, int start, int end) {
 
 void imprimirArreglo(vector<double> array) {
     for(int i = 0; i < array.size(); i++) {
-        cout << array[i] << " ";
+        cout << array[i] << endl;
     }
 }
 
@@ -79,12 +79,6 @@ int main() {
 
     cin >> N;
     leerArreglo(valores, N);
-
-    // Antes del sort
-    imprimirArreglo(valores);
-    cout << endl;
-
-    // Despues del sort
     mergeSort(valores, 0, N-1);
     imprimirArreglo(valores);
 
