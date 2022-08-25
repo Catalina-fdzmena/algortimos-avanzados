@@ -41,7 +41,6 @@ void calcularMonedas_algoritmoAvaro(std::vector<int> &denominaciones, std::vecto
         _cambio = _cambio % denominaciones[i];
         j++;
     }
-
     
     if (_cambio == 0)
         imprimirVector(monedas_a_regresar, noDenominaciones);
@@ -76,14 +75,14 @@ void calcularMonedas_algoritmoDinamico(std::vector<int> &denominaciones, std::ve
     }
     
     // Calcular la cantidad de monedas de cada denominacion
-    while (_cambio != 0)
+    while (_cambio > 0)
     {
         int temp = INT_MAX;
         int minIndex = -1;
 
         for (int j = 0; j < noDenominaciones; j++)
         {
-            if (F[_cambio - denominaciones[j]] < temp)
+            if ((_cambio - denominaciones[j]) >= 0 && F[_cambio - denominaciones[j]] < temp)
             {
                 temp = F[_cambio - denominaciones[j]];
                 minIndex = j;
@@ -94,9 +93,6 @@ void calcularMonedas_algoritmoDinamico(std::vector<int> &denominaciones, std::ve
         _cambio -= denominaciones[minIndex];
     }
 
-    // Encontrar minimo de celda actual.
-    // Guardar esa moneda. 
-    // Ir a la siguiente
     imprimirVector(monedas_a_regresar, noDenominaciones);
 }
 
