@@ -31,24 +31,25 @@ void ordenarVectorAscendiente(std::vector<int> &vec)
     std::sort(vec.begin(),vec.end());
 }
 
-void calcularMonedas_algoritmoAvaro(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar, int _cambio, int noDenominaciones)
+void calcularMonedas_algoritmoAvaro(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar_avaro, int _cambio, int noDenominaciones)
 {
     // Se traversa restando puesto a que las denominaciones están en orden ascendiente
     int j = 0; 
     for (int i = noDenominaciones - 1; i >= 0; i--)
     {
-        monedas_a_regresar[j] = _cambio / denominaciones[i];
+        monedas_a_regresar_avaro[j] = _cambio / denominaciones[i];
         _cambio = _cambio % denominaciones[i];
         j++;
     }
+
     
     if (_cambio == 0)
-        imprimirVector(monedas_a_regresar, noDenominaciones);
+        imprimirVector(monedas_a_regresar_avaro, noDenominaciones);
     else
         std::cout << "SIN SOLUCION" << std::endl;
 }
 
-void calcularMonedas_algoritmoDinamico(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar, int _cambio, int noDenominaciones)
+void calcularMonedas_algoritmoDinamico(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar_dinamico, int _cambio, int noDenominaciones)
 {
     if (denominaciones[0] != 1)
     {
@@ -89,11 +90,11 @@ void calcularMonedas_algoritmoDinamico(std::vector<int> &denominaciones, std::ve
             }
         }
 
-        monedas_a_regresar[minIndex] += 1;
+        monedas_a_regresar_dinamico[noDenominaciones - minIndex - 1] += 1; // Se debe guardar hasta el final porque el resultado va de mayor a menor. 
         _cambio -= denominaciones[minIndex];
     }
 
-    imprimirVector(monedas_a_regresar, noDenominaciones);
+    imprimirVector(monedas_a_regresar_dinamico, noDenominaciones);
 }
 
 int main()
