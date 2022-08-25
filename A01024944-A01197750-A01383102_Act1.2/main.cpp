@@ -5,21 +5,15 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <limits.h>
 
-int calcularMonedas_algoritmoAvaro(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar, int _cambio, int noDenominaciones)
+void imprimirVector(std::vector<int> &vec, int n)
 {
-    for (int i = 0; i < noDenominaciones; i++)
+    for (int i = 0; i < n; i++)
     {
-        monedas_a_regresar[i] = _cambio / denominaciones[i];
-        _cambio = _cambio % denominaciones[i];
+        std::cout << vec[i] << std::endl;
     }
-
-    return _cambio;
-}
-
-void calcularMonedas_algoritmoDinamico()
-{
-    // TODO
 }
 
 void leerDenominaciones(std::vector<int> &denominaciones, int noDenominaciones)
@@ -28,22 +22,82 @@ void leerDenominaciones(std::vector<int> &denominaciones, int noDenominaciones)
     for (int i = 0; i < noDenominaciones; i++)
     {
         std::cin >> denominacion;
-        denominaciones.insert(denominaciones.begin(), denominacion);
+        denominaciones.push_back(denominacion);
     }
 }
 
-// En caso de que las denominaciones vengan de mayor a menor
-void ordenarVectorAscendiente(std::vector<int> &denominaciones, int noDenominaciones)
+void ordenarVectorAscendiente(std::vector<int> &vec)
 {
-    // TODO
+    std::sort(vec.begin(),vec.end());
 }
 
-void imprimirVector(std::vector<int> &vec, int n)
+void calcularMonedas_algoritmoAvaro(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar, int _cambio, int noDenominaciones)
 {
-    for (int i = 0; i < n; i++)
+    // Se traversa restando puesto a que las denominaciones están en orden ascendiente
+    int j = 0; 
+    for (int i = noDenominaciones - 1; i >= 0; i--)
     {
-        std::cout << vec[i] << std::endl;
+        monedas_a_regresar[j] = _cambio / denominaciones[i];
+        _cambio = _cambio % denominaciones[i];
+        j++;
     }
+
+    
+    if (_cambio == 0)
+        imprimirVector(monedas_a_regresar, noDenominaciones);
+    else
+        std::cout << "SIN SOLUCION" << std::endl;
+}
+
+void calcularMonedas_algoritmoDinamico(std::vector<int> &denominaciones, std::vector<int> &monedas_a_regresar, int _cambio, int noDenominaciones)
+{
+    if (denominaciones[0] != 1)
+    {
+        std::cout << denominaciones[0];
+        std::cout << "NO SE PUEDE RESOLVER CON PROGRAMACION DINAMICA" << std::endl;
+        return;
+    }
+
+    std::vector<int> F(_cambio + 1, INT_MAX);
+    F[0] = 0;
+
+    for (int i = 1; i <= _cambio; i++)
+    {
+        int temp = INT_MAX;
+        int j = 0;
+
+        while (j < noDenominaciones && i >= denominaciones[j])
+        {
+            temp = std::min(F[i - denominaciones[j]], temp);
+            j++;
+        }
+
+        F[i] = temp + 1;
+    }
+    
+    // Calcular la cantidad de monedas de cada denominacion
+    while (_cambio != 0)
+    {
+        int temp = INT_MAX;
+        int minIndex = -1;
+
+        for (int j = 0; j < noDenominaciones; j++)
+        {
+            if (F[_cambio - denominaciones[j]] < temp)
+            {
+                temp = F[_cambio - denominaciones[j]];
+                minIndex = j;
+            }
+        }
+
+        monedas_a_regresar[minIndex] += 1;
+        _cambio -= denominaciones[minIndex];
+    }
+
+    // Encontrar minimo de celda actual.
+    // Guardar esa moneda. 
+    // Ir a la siguiente
+    imprimirVector(monedas_a_regresar, noDenominaciones);
 }
 
 int main()
@@ -54,21 +108,19 @@ int main()
     // Leer denominaciones
     std::cin >> N;
     leerDenominaciones(denominaciones, N);
-    ordenarVectorAscendiente(denominaciones, N);
+    ordenarVectorAscendiente(denominaciones);
     
-    std::vector<int> monedas_a_regresar(N, 0);      // Inicializar vector de monedas a regresar
-    std::cin >> P;                                  // Leer el precio del producto
-    std::cin >> Q;                                  // Leer billete con el que se hace el pago
-    int cambio = Q - P;                             // Calcular cambio a devolver
+    std::cin >> P;         // Leer el precio del producto
+    std::cin >> Q;         // Leer billete con el que se hace el pago
+    int cambio = Q - P;    // Calcular cambio a devolver
 
     // ALGORITMO DINAMICO
+    std::vector<int> monedas_a_regresar_dinamico(N, 0); // Inicializar vector de monedas a regresar
+    calcularMonedas_algoritmoDinamico(denominaciones, monedas_a_regresar_dinamico, cambio, N);
 
     // ALGORITMO AVARO
-    int cambioAvaro = calcularMonedas_algoritmoAvaro(denominaciones, monedas_a_regresar, cambio, N);
-    if (cambioAvaro == 0)
-        imprimirVector(monedas_a_regresar, N);
-    else
-        std::cout << "SIN SOLUCION" << std::endl;
-
+    std::vector<int> monedas_a_regresar_avaro(N, 0);
+    calcularMonedas_algoritmoAvaro(denominaciones, monedas_a_regresar_avaro, cambio, N);
+    
     return 0;
 }
