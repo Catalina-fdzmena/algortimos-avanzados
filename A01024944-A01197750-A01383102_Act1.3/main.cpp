@@ -1,7 +1,7 @@
 // Actividad 1.3
 // Jose Emilio Alvear Cantu - A01024944
 // Andrea Catalina Fernandez Medina - A01197750
-// Carlos Milano
+// Carlos Milano - A01383102
 
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
 
