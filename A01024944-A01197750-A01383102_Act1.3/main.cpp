@@ -142,6 +142,7 @@ int main()
 
     cout << endl;
 
+
     //Solución Branch and Bound 
     imprimirVector(bestPath, M, N);
 
