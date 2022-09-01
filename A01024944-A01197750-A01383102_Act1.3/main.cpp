@@ -146,13 +146,13 @@ int main()
     //Solución Branch and Bound 
     imprimirVector(bestPath, M, N);
 
-/*    if (resolverBranchAndBound(laberinto, M, N))
+    if (resolverBranchAndBound(laberinto, M, N))
         imprimirVector(bestPath, M, N);
     else
         cout << "SIN SOLUCION BACKTRACKING" << endl;
 
     cout << endl;
- */   
+    
 
     return 0;
 }
