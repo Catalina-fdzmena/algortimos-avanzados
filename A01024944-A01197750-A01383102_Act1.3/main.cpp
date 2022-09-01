@@ -32,6 +32,9 @@ void imprimirVector(vector<vector<int>> &vec, int rows, int cols)
     }
 }
 
+
+//Complejidad  O(2^(n^2)) 
+
 bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<int>> &solucion_backtracking, int _M, int _N, int posicionRata_i, int posicionRata_j)
 {
     // Caso en el que se llega a la meta del laberinto
@@ -70,6 +73,8 @@ bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 //Branch and Bound 
+
+//Complejidad O(n^2)
 
 //Definir límites de la matriz para revisar shortest path 
 bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
@@ -114,7 +119,6 @@ std::vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, 
     }
     cout<<"jdn"<<endl;
     imprimirVector(bestPath, M, N);
-    cout<<"fcfs"<<endl;
     return bestPath;
     
     
@@ -149,6 +153,7 @@ int main()
     cout << endl;
 
 //Solución Branch and Bound 
+
     bestPath = resolverBranchAndBound(laberinto, M, N);
     imprimirVector(bestPath, M, N);
 /*
