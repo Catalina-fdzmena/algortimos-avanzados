@@ -5,7 +5,7 @@
 
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
 
-//Algoritmo de Branch & Bound en el algoritmo de 
+//Algoritmo Laberinto Backtracking
 
 #include <iostream>
 #include <vector>
@@ -62,6 +62,22 @@ bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<
     return false;
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+//Branch and Bound 
+
+//Definir límites de la matriz para revisar shortest path 
+bool safeBoundaries(){
+
+}
+
+
+//Resolution function
+void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N)
+{
+
+}
+
 int main()
 {
     int M, N;
@@ -92,4 +108,7 @@ int main()
     imprimirVector(solucion_branchAndBound, M, N);
 
     return 0;
+
+
+    //Solucionar Branch and Bound 
 }
