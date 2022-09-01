@@ -3,9 +3,13 @@
 // Andrea Catalina Fernandez Mena - A01197750
 // Carlos Milano - A01383102
 
+//Instrucciones: 
+//Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
+
+
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
 
-//Algoritmo Laberinto Backtracking
+//Algoritmo Laberinto Backtracking basado de: 
 
 #include <iostream>
 #include <vector>
@@ -143,9 +147,4 @@ int main()
     imprimirVector(bestPath, M, N);
 
     return 0;
-
-
-    //Solucionar Branch and Bound 
-
-    resolverBranchAndBound();
 }
