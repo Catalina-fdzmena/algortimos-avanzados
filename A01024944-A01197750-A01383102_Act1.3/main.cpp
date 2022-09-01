@@ -96,16 +96,22 @@ void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
 
         while(i < N || j < M){
             bestPath[i][j] = 1;
+
+
+
+
             if(laberinto[i+1][j] == 1){
                 pathAvailable.push({i+1,j});
                 i++;
             }else if(laberinto[i][j+1] == 1){
                 pathAvailable.push({i,j+1});
                 j++;
+                
             }else{
                 pathAvailable.pop();
                 i++;
                 j++;
+                
             }
         }
     }
@@ -144,15 +150,12 @@ int main()
 
 
     //Solución Branch and Bound 
+    throw(resolverBranchAndBound(laberinto, M, N)){
     imprimirVector(bestPath, M, N);
-
-    if (resolverBranchAndBound(laberinto, M, N))
-        imprimirVector(bestPath, M, N);
-    else
-        cout << "SIN SOLUCION BACKTRACKING" << endl;
+    }catch{
+        cout << "SIN SOLUCIÓN BRANCH AND BOUND"<<endl;
 
     cout << endl;
-    
-
+    }
     return 0;
 }
