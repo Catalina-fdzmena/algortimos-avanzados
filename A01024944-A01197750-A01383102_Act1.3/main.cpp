@@ -82,7 +82,7 @@ bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
 
 
 //Resolution function branch and bound
-std:: vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
+std::vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
     //Crear queue vacío
     queue<vector<int>> pathAvailable;
     //Crear vector 2D 
@@ -145,7 +145,11 @@ int main()
 
     cout << endl;
 
+//Solución Branch and Bound 
 
+    resolverBranchAndBound(laberinto, M, N);
+    imprimirVector(bestPath, M, N);
+/*
     //Solución Branch and Bound 
     try{
         imprimirVector(resolverBranchAndBound(laberinto, M, N));
@@ -157,3 +161,4 @@ int main()
     }
     return 0;
 }
+*/
