@@ -82,8 +82,8 @@ bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
 
 
 //Resolution function
-void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
-    //Crear vector vacío
+std:: vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
+    //Crear queue vacío
     queue<vector<int>> pathAvailable;
     //Crear vector 2D 
     vector<vector<int>> bestPath(M, vector<int>(N));
@@ -96,10 +96,6 @@ void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
 
         while(i < N || j < M){
             bestPath[i][j] = 1;
-
-
-
-
             if(laberinto[i+1][j] == 1){
                 pathAvailable.push({i+1,j});
                 i++;
@@ -114,6 +110,7 @@ void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
                 
             }
         }
+        return bestPath;
     }
 
 
@@ -150,9 +147,10 @@ int main()
 
 
     //Solución Branch and Bound 
-    throw(resolverBranchAndBound(laberinto, M, N)){
-    imprimirVector(bestPath, M, N);
-    }catch{
+    try{
+        imprimirVector(resolverBranchAndBound(laberinto, M, N));
+    //imprimirVector(bestPath, M, N);
+    }catch(invalid_argument){
         cout << "SIN SOLUCIÓN BRANCH AND BOUND"<<endl;
 
     cout << endl;
