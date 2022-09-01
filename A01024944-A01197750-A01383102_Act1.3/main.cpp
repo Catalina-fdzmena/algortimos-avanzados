@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include <limits.h>
+#include <queue>
 
 using namespace std;
 
@@ -67,14 +68,45 @@ bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<
 //Branch and Bound 
 
 //Definir límites de la matriz para revisar shortest path 
-bool safeBoundaries(){
-
+bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
+    //Condicionales del laberinto que se genera con M y N
+    if(x >= 0 && x < laberinto[0].size() && y >= 0 && y < laberinto[0].size() &&laberinto[x][y] ==1)
+        return true;
+    else
+        return false;
 }
 
 
 //Resolution function
-void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N)
-{
+void resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
+    //Crear vector vacío
+    queue<vector<int>> pathAvailable;
+    //Crear vector 2D 
+    vector<vector<int>> bestPath(M, vector<int>(N));
+
+    if (!safeBoundaries(laberinto,0,0)){
+        cout << "SIN SOLUCION BRANCH AND BOUND" << endl;
+    }else{
+        int i{0};
+        int j{0};
+
+        while(i < N || j < M){
+            bestPath[i][j] = 1;
+            if(laberinto[i+1][j] == 1){
+                pathAvailable.push({i+1,j});
+                i++;
+            }else if(laberinto[i][j+1] == 1){
+                pathAvailable.push({i,j+1});
+                j++;
+            }else{
+                pathAvailable.pop();
+                i++;
+                j++;
+            }
+        }
+    }
+
+
 
 }
 
