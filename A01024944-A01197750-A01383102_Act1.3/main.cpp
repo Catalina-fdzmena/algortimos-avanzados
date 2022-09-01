@@ -112,7 +112,12 @@ std::vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, 
         }
 
     }
+    cout<<"jdn"<<endl;
+    imprimirVector(bestPath, M, N);
+    cout<<"fcfs"<<endl;
     return bestPath;
+    
+    
 }
 
 int main()
@@ -144,8 +149,7 @@ int main()
     cout << endl;
 
 //Solución Branch and Bound 
-
-    resolverBranchAndBound(laberinto, M, N);
+    bestPath = resolverBranchAndBound(laberinto, M, N);
     imprimirVector(bestPath, M, N);
 /*
     //Solución Branch and Bound 
