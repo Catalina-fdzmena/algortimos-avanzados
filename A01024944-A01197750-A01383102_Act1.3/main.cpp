@@ -9,7 +9,7 @@
 
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
 
-//Algoritmo Laberinto Backtracking basado de: https://ocw.snu.ac.kr/sites/default/files/NOTE/498.pdf
+// Algoritmo Laberinto Branch and Bound basado en: https://ocw.snu.ac.kr/sites/default/files/NOTE/498.pdf
 
 #include <iostream>
 #include <vector>
@@ -32,9 +32,7 @@ void imprimirVector(vector<vector<int>> &vec, int rows, int cols)
     }
 }
 
-
-//Complejidad  O(2^(n^2)) 
-
+//Complejidad  O(2^(n^2))
 bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<int>> &solucion_backtracking, int _M, int _N, int posicionRata_i, int posicionRata_j)
 {
     // Caso en el que se llega a la meta del laberinto
@@ -73,55 +71,59 @@ bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
 //Branch and Bound 
-
 //Complejidad O(n^2)
 
 //Definir límites de la matriz para revisar shortest path 
 bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
     //Condicionales del laberinto que se genera con M y N
-    if(x >= 0 && x < laberinto[0].size() && y >= 0 && y < laberinto[0].size() &&laberinto[x][y] ==1)
+    if(x >= 0 && x < laberinto[0].size() && y >= 0 && y < laberinto[0].size() && laberinto[x][y] == 1)
         return true;
-    else
-        return false;
+    
+    return false;
 }
 
 
 //Resolution function branch and bound
-std::vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
+vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
     //Crear queue vacío
     queue<vector<int>> pathAvailable;
     //Crear vector 2D 
     vector<vector<int>> bestPath(M, vector<int>(N));
 
-    if (!safeBoundaries(laberinto,0,0)){
+    if (!safeBoundaries(laberinto,0,0))
+    {
         cout << "SIN SOLUCION BRANCH AND BOUND" << endl;
-    }else{
+    }
+    else
+    {
         int i{0};
         int j{0};
 
-        while(i < N || j < M){
+        while (i < N || j < M)
+        {
             bestPath[i][j] = 1;
-            if(laberinto[i+1][j] == 1){
-                pathAvailable.push({i+1,j});
+            if (laberinto[i+1][j] == 1)
+            {
+                pathAvailable.push({i+1, j});
                 i++;
-            }else if(laberinto[i][j+1] == 1){
-                pathAvailable.push({i,j+1});
+            }
+            else if (laberinto[i][j+1] == 1)
+            {
+                pathAvailable.push({i, j+1});
                 j++;
-                
-            }else{
+            }
+            else
+            {
                 pathAvailable.pop();
                 i++;
                 j++;
-                
             }
         }
-
     }
-    cout<<"jdn"<<endl;
+
+    cout<<" "<<endl;
     imprimirVector(bestPath, M, N);
     return bestPath;
-    
-    
 }
 
 int main()
@@ -152,11 +154,10 @@ int main()
 
     cout << endl;
 
-//Solución Branch and Bound 
-
-    bestPath = resolverBranchAndBound(laberinto, M, N);
-    imprimirVector(bestPath, M, N);
-/*
+    //Solución Branch and Bound 
+    resolverBranchAndBound(laberinto, M, N);
+    
+    /*
     //Solución Branch and Bound 
     try{
         imprimirVector(resolverBranchAndBound(laberinto, M, N));
