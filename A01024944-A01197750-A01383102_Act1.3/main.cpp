@@ -9,7 +9,7 @@
 
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
 
-//Algoritmo Laberinto Backtracking basado de: 
+//Algoritmo Laberinto Backtracking basado de: https://ocw.snu.ac.kr/sites/default/files/NOTE/498.pdf
 
 #include <iostream>
 #include <vector>
@@ -143,8 +143,15 @@ int main()
     cout << endl;
 
     //Solución Branch and Bound 
-    
     imprimirVector(bestPath, M, N);
+
+/*    if (resolverBranchAndBound(laberinto, M, N))
+        imprimirVector(bestPath, M, N);
+    else
+        cout << "SIN SOLUCION BACKTRACKING" << endl;
+
+    cout << endl;
+ */   
 
     return 0;
 }
