@@ -110,11 +110,9 @@ std::vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, 
                 
             }
         }
-        return bestPath;
+
     }
-
-
-
+    return bestPath;
 }
 
 int main()
