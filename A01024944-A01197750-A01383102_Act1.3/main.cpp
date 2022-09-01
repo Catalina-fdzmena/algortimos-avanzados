@@ -146,4 +146,6 @@ int main()
 
 
     //Solucionar Branch and Bound 
+
+    resolverBranchAndBound();
 }
