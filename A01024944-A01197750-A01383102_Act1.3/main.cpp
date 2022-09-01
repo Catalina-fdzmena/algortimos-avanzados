@@ -81,7 +81,7 @@ bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
 }
 
 
-//Resolution function
+//Resolution function branch and bound
 std:: vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
     //Crear queue vacío
     queue<vector<int>> pathAvailable;
