@@ -117,7 +117,7 @@ int main()
 
     vector<vector<int>> laberinto(M, std::vector<int>(N, -1));
     vector<vector<int>> solucion_backtracking(M, std::vector<int>(N, 0));
-    vector<vector<int>> solucion_branchAndBound(M, std::vector<int>(N, 0));
+    vector<vector<int>> bestPath(M, std::vector<int>(N, 0));
 
     // Leer laberinto
     int valorBooleano;
@@ -137,7 +137,10 @@ int main()
         cout << "SIN SOLUCION BACKTRACKING" << endl;
 
     cout << endl;
-    imprimirVector(solucion_branchAndBound, M, N);
+
+    //Solución Branch and Bound 
+    
+    imprimirVector(bestPath, M, N);
 
     return 0;
 
