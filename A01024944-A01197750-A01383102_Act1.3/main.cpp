@@ -121,8 +121,7 @@ vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M
         }
     }
 
-    cout<<" "<<endl;
-    imprimirVector(bestPath, M, N);
+    //imprimirVector(bestPath, M, N);
     return bestPath;
 }
 
@@ -155,18 +154,17 @@ int main()
     cout << endl;
 
     //Solución Branch and Bound 
-    resolverBranchAndBound(laberinto, M, N);
-    
-    /*
+    bestPath = resolverBranchAndBound(laberinto, M, N);
+
+
     //Solución Branch and Bound 
     try{
-        imprimirVector(resolverBranchAndBound(laberinto, M, N));
-    //imprimirVector(bestPath, M, N);
+        imprimirVector(bestPath, M, N);
     }catch(invalid_argument){
         cout << "SIN SOLUCIÓN BRANCH AND BOUND"<<endl;
 
     cout << endl;
     }
-    */
+
     return 0;
 }
