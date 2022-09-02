@@ -3,6 +3,8 @@
 // Andrea Catalina Fernandez Mena - A01197750
 // Carlos Milano - A01383102
 
+// Profesor Eduardo: ertello@tec.mx
+
 //Instrucciones: 
 //Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
 
