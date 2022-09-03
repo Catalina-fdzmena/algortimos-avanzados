@@ -46,3 +46,41 @@ Output
 
 
 */
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+#define MAX 1001
+
+
+/* PART 1*/
+
+// auxiliary function for KMP
+// Complexity O(n)
+vector<int> lpsvFunc(string patron){
+    int n = patron.length();
+    vector<int> lpsv(n, 0);             // longest proper prefix lo ponemos como sufijo
+    int j=0, i=1;
+    while (i < n){
+        if (patron[i] == patron[j]){    //si coinciden ambos patrones
+            lpsv[i] = j+1;
+            i++;
+            j++;
+        }
+        else{                           // Si no coincide
+            if (j == 0){                // if it's at the start
+                lpsv[i] = 0;
+                i++;
+            }
+            else{                       // move one index back
+                j = lpsv[j-1];
+            }
+        }
+    }
+    return lpsv;
+}
