@@ -1,0 +1,12 @@
+Parte 1
+true 427 615 857
+true 574 667
+true 0 463 640 705
+false
+true 56 473 483 767
+true 22 414 415 646 745 974
+Parte 2
+75 79 A2E2A
+45 49 C8F8C
+Parte 3
+673 677 943A5
