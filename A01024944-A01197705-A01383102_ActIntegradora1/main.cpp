@@ -84,3 +84,10 @@ vector<int> lpsvFunc(string patron){
     }
     return lpsv;
 }
+
+
+int main(){
+
+
+    return 0;
+}
