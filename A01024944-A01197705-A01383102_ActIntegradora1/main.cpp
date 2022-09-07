@@ -39,15 +39,105 @@ using namespace std;
 
 //PARTE 1 ACTIVIDA INTEGRADORA 
 
-//Output must be generated
-/*
-    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición    
-     (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
-*/
+// Complejidad O(n)
+vector<int> longestProperPrefix(string patron){
+    int n = patron.length();
+    //Longest proper prefix también cuenta con función de sufijo
+    vector<int> longestProperPrefixVec(n, 0);             
+    int j=0, i=1;
+    while (i < n){
+        if (patron[i] == patron[j]){    // Patrones coinciden
+            longestProperPrefixVec[i] = j+1;
+            i++;
+            j++;
+        }
+        else{                        
+            // Si no hay patrones que coincidan
+            if (j == 0){     
+                //           
+                longestProperPrefixVec[i] = 0;
+                i++;
+            }
+            else{                       
+                //Regresa un índice 
+                j = longestProperPrefixVec[j-1];
+            }
+        }
+    }
+    return longestProperPrefixVec;
+}
+
+// ------ ALGORITMO Knuth-Morris-Pratt -----RECONOCER PATRONES 
+// Complejidad: O(n)
+pair< int, vector<int> > kmp (string &transmission, string code){
+    int found = 0;                          // times a code is present
+    vector<int> positionsMatching;             // indexes of where the code is found
+    vector<int> longestProperPrefixVec = longestProperPrefix(code);
+    int j=0, i=0;
+    int t = transmission.length();
+    int p = code.length();
+
+    while (i < t){
+        if (transmission[i] == code[j]){
+            i++;
+            j++;
+            if (j == p){                        
+                positionsMatching.push_back(i-p);  
+                j = longestProperPrefixVec[j-1];
+                found++;                        
+            }
+        }
+        else{
+            if (j == 0){
+                i++;
+            }
+            else{
+                j = longestProperPrefixVec[j-1];
+            }
+        }
+    }
+    return {found, positionsMatching};
+}
+
+// Complejidad: O(n*m)
+void codeFoundOutput (ofstream &outputResult, vector<string> &transmissionN, vector<string> &mcodeN){
+    if (outputResult.is_open()){
+        for (int i=0; i<mcodeN.size(); i++){
+                outputResult << "Código: " << mcodeN[i] << endl;
+            for (int j=0; j<transmissionN.size(); j++){
+                pair <int, vector<int> > foundCodes = kmp(transmissionN[j], mcodeN[i]);
+                outputResult << "Transmision"  << j+1 << ".txt"<< " ==> ";
+                //Encontrar número de recurrencias 
+                /*if (foundCodes.first > 0){
+                    outputResult << foundCodes.first << " veces " << endl;
+                    for (int k=0; k<foundCodes.second.size()-1; k++){
+                        outputResult << foundCodes.second[k] << ", ";
+                    }
+                    outputResult << foundCodes.second[foundCodes.second.size()-1] << endl;
+                }
+                else{
+                    outputResult << "0 veces" << endl;
+                }*/
+            }
+
+            //Output a generar 
+
+            //(true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición 
+
+            /*
+            *Generar un bool
+            *Lectura de archivo por archivo 
+            *Imprimir la secuencia -- Listo!
+            * espacio 
+            * posición en la cuál se encuentra -- 
+            * 
+            */
+        outputResult << "--------------" << endl;
+        }
+    outputResult << "\n==============\n" << endl;
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //PARTE 2 ACT INTEGRADORA 
@@ -256,9 +346,9 @@ int main(){
     transmissionN.push_back(t2);
     transmissionN.push_back(t3);
 
-    //findCodes(outputResult, transmissionN, mcodeN);   //FOR PART 1
-    findPalindrome(outputResult, transmissionN);        //FOR PART 2
-    getLongestSubstring(outputResult, transmissionN);   //FOR PART 3
+    codeFoundOutput(outputResult, transmissionN, mcodeN);
+    findPalindrome(outputResult, transmissionN);
+    getLongestSubstring(outputResult, transmissionN);
 
     return 0;
 }
