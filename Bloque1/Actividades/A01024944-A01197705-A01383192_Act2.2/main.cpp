@@ -12,7 +12,12 @@
 //Algoritmo Suffix Array basado en algoritmo de: https://www.geeksforgeeks.org/suffix-array-set-2-a-nlognlogn-algorithm/ 
 
 //Instrucciones: 
-//Ingresar desde cmd y colocar la instrucción main.exe<test00.txt>nombreParaOutput.txt  
+//Ingresar desde bash de linux g++ -g main.cpp
+//Despues proceder a escribir ./a.out <text00.txt
+
+//Otra manera de imprimirlo sin mostrar la parte de la palabra restante es: 
+//Ingresar desde cmd y colocar la instrucción main.exe < text00.txt > nombreParaOutput.txt  
+
 
 
 #include <iostream>
@@ -117,7 +122,7 @@ int main(){
 	// int n = strlen(txt);
     int n = wordChosen.length();
 	int *suffixArr = buildSuffixArray(wordChosen, n);
-	cout << "Following is suffix array for " << wordChosen << endl;
-	print(suffixArr, n, wordChosen);
+	cout << "El siguiente arreglo de sufijos en orden alfabético para " << wordChosen << " es:"<<endl;
+	print(suffixArr,n, wordChosen);
 	return 0;
 }
