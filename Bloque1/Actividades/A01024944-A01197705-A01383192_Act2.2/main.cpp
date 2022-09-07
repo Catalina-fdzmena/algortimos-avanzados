@@ -17,6 +17,7 @@
 
 //Otra manera de imprimirlo sin mostrar la parte de la palabra restante es: 
 //Ingresar desde cmd y colocar la instrucción main.exe < text00.txt > nombreParaOutput.txt  
+      //Nota este método unicamente ejecuta las coordenas de órden alfabético
 
 
 
