@@ -12,7 +12,7 @@
 //Algoritmo Suffix Array basado en algoritmo de: https://www.geeksforgeeks.org/suffix-array-set-2-a-nlognlogn-algorithm/ 
 
 //Instrucciones: 
-//Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
+//Ingresar desde cmd y colocar la instrucción main.exe<test00.txt>nombreParaOutput.txt  
 
 
 #include <iostream>
