@@ -93,10 +93,18 @@ int *buildSuffixArray(string txt, int n)
 }
 
 
-void print(int arr[], int n)
+void print(int arr[], int n, string wordChosen)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++){
+		int partialWord = arr[i];
 		cout << arr[i] << " ";
+		//Segudo indice revisa el arreglo 
+		for(int j = partialWord; j<wordChosen.length(); j++){
+			cout << wordChosen[j] << " ";
+		}
+	}
+
+		
 	cout << endl;
 }
 
@@ -108,6 +116,6 @@ int main(){
     int n = wordChosen.length();
 	int *suffixArr = buildSuffixArray(wordChosen, n);
 	cout << "Following is suffix array for " << wordChosen << endl;
-	print(suffixArr, n);
+	print(suffixArr, n, wordChosen);
 	return 0;
 }
