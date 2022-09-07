@@ -1,7 +1,7 @@
 // Actividad 1.2
 // Jose Emilio Alvear Cantu - A01024944
 // Andrea Catalina Fernandez Medina - A01197750
-// Carlos 
+// Carlos Milano - A01383102
 
 #include <iostream>
 #include <vector>
