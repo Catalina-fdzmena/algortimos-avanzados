@@ -34,21 +34,17 @@ int valuesComparisson(struct suffix a, struct suffix b)
 
 int *buildSuffixArray(string txt, int n)
 {
-	// A structure to store suffixes and their indexes
+	// Struct para gurdar sufijos e indices
 	struct suffix suffixes[n];
-
-	// Store suffixes and their indexes in an array of structures.
-	// The structure is needed to sort the suffixes alphabetically
-	// and maintain their old indexes while sorting
+	// Organización de manera alfabética y revisar sus indices mientras se organizan.
 	for (int i = 0; i < n; i++)
 	{
+		// Acomodar suffixesutilizando comparación
 		suffixes[i].index = i;
 		suffixes[i].level[0] = txt[i] - 'a';
 		suffixes[i].level[1] = ((i+1) < n)? (txt[i + 1] - 'a'): -1;
 	}
 
-	// Sort the suffixes using the comparison function
-	// defined above.
 	sort(suffixes, suffixes+n, valuesComparisson);
 	int suffixIndex[n]; 
 
