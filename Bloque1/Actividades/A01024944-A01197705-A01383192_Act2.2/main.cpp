@@ -12,7 +12,6 @@
 //Algoritmo Suffix Array basado en algoritmo de: https://www.geeksforgeeks.org/suffix-array-set-2-a-nlognlogn-algorithm/ 
 
 
-
 #include <iostream>
 #include <cstring>
 #include <algorithm>
@@ -33,7 +32,7 @@ int valuesComparisson(struct suffix a, struct suffix b)
 }
 
 
-int *buildSuffixArray(char *txt, int n)
+int *buildSuffixArray(string txt, int n)
 {
 	// A structure to store suffixes and their indexes
 	struct suffix suffixes[n];
@@ -105,13 +104,14 @@ void print(int arr[], int n)
 	cout << endl;
 }
 
-main(){
+int main(){
     string wordChosen;
     cin>>wordChosen;
-    char txt[] ="wordChosen";   //No se si sea la manera correcta de aceptar los casos de prueba
-	int n = strlen(txt);
-	int *suffixArr = buildSuffixArray(txt, n);
-	cout << "Following is suffix array for " << txt << endl;
+    // char txt[] ="wordChosen";   //No se si sea la manera correcta de aceptar los casos de prueba
+	// int n = strlen(txt);
+    int n = wordChosen.length();
+	int *suffixArr = buildSuffixArray(wordChosen, n);
+	cout << "Following is suffix array for " << wordChosen << endl;
 	print(suffixArr, n);
 	return 0;
 }
