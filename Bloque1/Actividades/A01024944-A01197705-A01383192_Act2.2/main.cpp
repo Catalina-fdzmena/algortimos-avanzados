@@ -105,10 +105,9 @@ void print(int arr[], int n, string wordChosen)
 		for(int j = partialWord; j<wordChosen.length(); j++){
 			cout << wordChosen[j] << " ";
 		}
-	}
-
-		
+	
 	cout << endl;
+	}
 }
 
 int main(){
