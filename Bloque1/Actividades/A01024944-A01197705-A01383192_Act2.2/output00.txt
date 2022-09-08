@@ -1,0 +1,7 @@
+El arreglo de sufijos para morado es el siguiente:
+3 a d o 
+4 d o 
+0 m o r a d o 
+5 o 
+1 o r a d o 
+2 r a d o 

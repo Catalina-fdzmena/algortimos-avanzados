@@ -1,0 +1,7 @@
+El arreglo de sufijos para banana es el siguiente:
+5 a 
+3 a n a 
+1 a n a n a 
+0 b a n a n a 
+4 n a 
+2 n a n a 
