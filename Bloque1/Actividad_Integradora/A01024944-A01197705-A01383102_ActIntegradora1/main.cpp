@@ -5,24 +5,22 @@
 // Carlos Milano - A01383102
 
 /*
-
 Input
-     nada, solamente deben existir los 5 archivos en la misma ruta donde se ejecuta el programa    
+    Nada, solamente deben existir los 5 archivos en la misma ruta donde se ejecuta el programa    
 
 Output
   Parte 1
-     (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición    
-     (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
-     (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
+    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición    
+    (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición
+    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
+    (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
+    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
+    (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
   Parte2
-     posiciónInicial posiciónFinal (para archivo de transmisión1) códigoMalicioso
-     posiciónInicial posiciónFinal (para archivo de transmisión2) códigoMalicioso
+    posiciónInicial posiciónFinal (para archivo de transmisión1) códigoMalicioso
+    posiciónInicial posiciónFinal (para archivo de transmisión2) códigoMalicioso
   Parte3
-      posiciónInicial posiciónFinal (de substring común más largo entre archivos de transmisión 1 y 2) longitudSubstringComún substringComún
-
+    posiciónInicial posiciónFinal (de substring común más largo entre archivos de transmisión 1 y 2) longitudSubstringComún substringComún
 */
 
 #include <iostream>
@@ -100,12 +98,12 @@ pair< int, vector<int> > kmp (string &transmission, string code){
 }
 
 // Complejidad: O(n*m)
-void codeFoundOutput (ofstream &outputResult, vector<string> &transmissionN, vector<string> &mcodeN){
+void codeFoundOutput (ofstream &outputResult, vector<string> &transmisiones, vector<string> &codigosMaliciosos){
     if (outputResult.is_open()){
-        for (int i=0; i<mcodeN.size(); i++){
-                outputResult << "Código: " << mcodeN[i] << endl;
-            for (int j=0; j<transmissionN.size(); j++){
-                pair <int, vector<int> > foundCodes = kmp(transmissionN[j], mcodeN[i]);
+        for (int i=0; i<codigosMaliciosos.size(); i++){
+                outputResult << "Código: " << codigosMaliciosos[i] << endl;
+            for (int j=0; j<transmisiones.size(); j++){
+                pair <int, vector<int> > foundCodes = kmp(transmisiones[j], codigosMaliciosos[i]);
                 outputResult << "Transmision"  << j+1 << ".txt"<< " ==> ";
                 //Encontrar número de recurrencias 
                 /*if (foundCodes.first > 0){
@@ -132,9 +130,7 @@ void codeFoundOutput (ofstream &outputResult, vector<string> &transmissionN, vec
             * posición en la cuál se encuentra -- 
             * 
             */
-        outputResult << "--------------" << endl;
         }
-    outputResult << "\n==============\n" << endl;
     }
 }
 
@@ -210,20 +206,19 @@ pair<string, int> manacher(string text){
 //Malware se encuentra a manera de palindromes
 
 // Complejidad: O(n)
-void findPalindrome(ofstream &outputResult, vector<string> &transmissionN){
+void findPalindrome(ofstream &outputResult, vector<string> &transmisiones){
     vector< pair<string, int> > palindromes;
-    for (int i=0; i<transmissionN.size(); i++){                
-        palindromes.push_back(manacher(transmissionN[i]));
+    for (int i=0; i<transmisiones.size(); i++){                
+        palindromes.push_back(manacher(transmisiones[i]));
     }
 
     if (outputResult.is_open()){
         outputResult << "Palíndromo más grande:" << endl;
-        for (int i=0; i<transmissionN.size(); i++){
+        for (int i=0; i<transmisiones.size(); i++){
             outputResult << "\tTransmision" << i+1 << ".txt" << " ==> " << "Posición: " << palindromes[i].second << endl;
             outputResult << "\t" << palindromes[i].first << endl;
             outputResult << "\t----" << endl;
         }
-        outputResult << "\n==============\n" << endl;
     }
 }
 
@@ -280,15 +275,13 @@ string LCSS(string st1, string st2){
 }
 
 // Complejidad: O(1)
-void getLongestSubstring (ofstream &outputResult, vector<string> transmissionN){
+void getLongestSubstring (ofstream &outputResult, vector<string> transmisiones){
     if (outputResult.is_open()){
         outputResult << "Substring más largo:" << endl;
         
-        outputResult << "\tSubstring más largo t1-t2 ==> " << LCSS(transmissionN[0], transmissionN[1]) << endl;
-        outputResult << "\tSubstring más largo t1-t3 ==> " << LCSS(transmissionN[0], transmissionN[2]) << endl;
-        outputResult << "\tSubstring más largo t2-t3 ==> " << LCSS(transmissionN[1], transmissionN[2]) << endl;
-         
-        outputResult << "==============\n" << endl;
+        outputResult << "\tSubstring más largo t1-t2 ==> " << LCSS(transmisiones[0], transmisiones[1]) << endl;
+        outputResult << "\tSubstring más largo t1-t3 ==> " << LCSS(transmisiones[0], transmisiones[2]) << endl;
+        outputResult << "\tSubstring más largo t2-t3 ==> " << LCSS(transmisiones[1], transmisiones[2]) << endl;
     }
 }
 
@@ -296,59 +289,46 @@ void getLongestSubstring (ofstream &outputResult, vector<string> transmissionN){
 /* ----------------------------------------------------------------
    ---------------------------------------------------------------- */
 
-int main(){
-    //Variables para transición y revisión de cada caso de prueba
-    string code1, code2, code3, t1, t2, t3;                        
+int main()
+{
+    // Variables para transición y revisión de cada caso de prueba
+    string mcode1, mcode2, mcode3, t1, t2, t3;
+    vector<string> codigosMaliciosos;
+    vector<string> transmisiones;            
 
-    ifstream codeDoc("mcode1.txt");
-    ifstream codeDoc2("mcode2.txt");
-    ifstream codeDoc3("mcode3.txt");                      // reading files
-    ifstream transmission1("transmission1.txt");
-    ifstream transmission2("transmission2.txt");
-    ifstream transmission3("transmission3.txt");
-    ofstream outputResult("outputResult.txt");
+    // Leer archivos
+    ifstream archivoCodigoMalicioso1("mcode1.txt");
+    ifstream archivoCodigoMalicioso2("mcode2.txt");
+    ifstream archivoCodigoMalicioso3("mcode3.txt");
+    ifstream archivoTransmission1("transmission1.txt");
+    ifstream archivoTransmission2("transmission2.txt");
+    //ifstream transmission3("transmission3.txt");
+    ofstream outputResult("output.txt");
 
-    //Vector que almacena lo detectado como malware
-    vector<string> mcodeN;  //Defined with N at the end, cause it has N values
+    // Leer y guardar codigos maliciosos en el vector
+    getline(archivoCodigoMalicioso1, mcode1);                     
+    getline(archivoCodigoMalicioso2, mcode2);
+    getline(archivoCodigoMalicioso3, mcode3);
+    codigosMaliciosos.push_back(mcode1);
+    codigosMaliciosos.push_back(mcode2);
+    codigosMaliciosos.push_back(mcode3);
 
-    //Crear vector  para almacenar transmiciones                          
-    vector<string> transmissionN;   //Defined with N at the end, cause it has N values               
+    // Leer y guardar transmisiones en el vector
+    getline(archivoTransmission1, t1);                     
+    getline(archivoTransmission2, t2);
+    //getline(transmission3, t3);
+    transmisiones.push_back(t1);                    
+    transmisiones.push_back(t2);
+    transmisiones.push_back(t3);
 
-/*
-    //Enviar código hacía MCNODE para almacenar aquel correspondiente
-    getline(codeDoc, code1);                     
-    getline(codeDoc2, code2);
-    getline(codeDoc3, code3);
-    //Enviar detecciones de malware a los vectores correspondientes
-    codeDoc.push_back(code1);
-    codeDoc2.push_back(code2);
-    codeDoc3.push_back(code3);*/
+    outputResult << "Parte 1" << endl;
+    codeFoundOutput(outputResult, transmisiones, codigosMaliciosos);
 
-//Asignar variables a malware según el archivo así como inclusión a su mismo vector
+    outputResult << "Parte 2" << endl;
+    findPalindrome(outputResult, transmisiones);
 
-    if (getline(codeDoc, code1)){
-        mcodeN.push_back(code1);
-    }else if(getline(codeDoc2, code2)){
-        mcodeN.push_back(code2);
-    }else if(getline(codeDoc3, code3)){
-        mcodeN.push_back(code3);
-    }else{
-        cout<<"Document is not availabe to read malware"<<endl;
-    }
-
-    //Asignar a cada una de las transmisiones una de las variables creadas
-    getline(transmission1, t1);                     
-    getline(transmission2, t2);
-    getline(transmission3, t3);
-
-    //Enviar las transmisiones acumuladas en las vaariables hacía el vector de transmisiones
-    transmissionN.push_back(t1);                    
-    transmissionN.push_back(t2);
-    transmissionN.push_back(t3);
-
-    codeFoundOutput(outputResult, transmissionN, mcodeN);
-    findPalindrome(outputResult, transmissionN);
-    getLongestSubstring(outputResult, transmissionN);
+    outputResult << "Parte 3" << endl;
+    getLongestSubstring(outputResult, transmisiones);
 
     return 0;
 }
