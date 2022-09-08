@@ -32,7 +32,7 @@ void imprimirVector(vector<vector<int>> &vec, int rows, int cols)
     }
 }
 
-//Complejidad  O(2^(n^2))
+// Complejidad  O(2^(n^2))
 bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<int>> &solucion_backtracking, int _M, int _N, int posicionRata_i, int posicionRata_j)
 {
     // Caso en el que se llega a la meta del laberinto
@@ -68,26 +68,19 @@ bool resolverLaberintoBacktracing(vector<vector<int>> &laberinto, vector<vector<
     return false;
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------------
-
-//Branch and Bound 
-//Complejidad O(n^2)
-
-//Definir límites de la matriz para revisar shortest path 
-bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y){
-    //Condicionales del laberinto que se genera con M y N
+// Definir límites de la matriz para revisar shortest path 
+bool safeBoundaries(vector<vector<int>> &laberinto, int x, int y)
+{
+    // Condicionales del laberinto que se genera con M y N
     if(x >= 0 && x < laberinto[0].size() && y >= 0 && y < laberinto[0].size() && laberinto[x][y] == 1)
         return true;
-    
     return false;
 }
 
-
-//Resolution function branch and bound
-vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N){
-    //Crear queue vacío
+//Complejidad O(n^2)
+vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M, int N)
+{
     queue<vector<int>> pathAvailable;
-    //Crear vector 2D 
     vector<vector<int>> bestPath(M, vector<int>(N));
 
     if (!safeBoundaries(laberinto,0,0))
