@@ -3,6 +3,8 @@
 // Andrea Catalina Fernandez Mena - A01197750
 // Carlos Milano - A01383102
 
+// Profesor Eduardo: ertello@tec.mx
+
 //Instrucciones: 
 //Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
 
@@ -114,8 +116,7 @@ vector<vector<int>> resolverBranchAndBound(vector<vector<int>> &laberinto, int M
         }
     }
 
-    cout<<" "<<endl;
-    imprimirVector(bestPath, M, N);
+    //imprimirVector(bestPath, M, N);
     return bestPath;
 }
 
@@ -148,18 +149,17 @@ int main()
     cout << endl;
 
     //Solución Branch and Bound 
-    resolverBranchAndBound(laberinto, M, N);
-    
-    /*
+    bestPath = resolverBranchAndBound(laberinto, M, N);
+
+
     //Solución Branch and Bound 
     try{
-        imprimirVector(resolverBranchAndBound(laberinto, M, N));
-    //imprimirVector(bestPath, M, N);
+        imprimirVector(bestPath, M, N);
     }catch(invalid_argument){
         cout << "SIN SOLUCIÓN BRANCH AND BOUND"<<endl;
 
     cout << endl;
     }
-    */
+
     return 0;
 }
