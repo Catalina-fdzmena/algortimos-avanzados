@@ -297,15 +297,18 @@ void getLongestSubstring (ofstream &outputResult, vector<string> transmissionN){
    ---------------------------------------------------------------- */
 
 int main(){
+//Caso de prueba transmittion 3 no se va a usar, por lo que se dejará comentarizado en caso de que se determine implementarse
+
     //Variables para transición y revisión de cada caso de prueba
-    string code1, code2, code3, t1, t2, t3;                        
+    string code1, code2, code3, t1, t2;   
+    //string t3;                     
 
     ifstream codeDoc("mcode1.txt");
     ifstream codeDoc2("mcode2.txt");
     ifstream codeDoc3("mcode3.txt");                      // reading files
     ifstream transmission1("transmission1.txt");
     ifstream transmission2("transmission2.txt");
-    ifstream transmission3("transmission3.txt");
+    //ifstream transmission3("transmission3.txt");
     ofstream outputResult("outputResult.txt");
 
     //Vector que almacena lo detectado como malware
@@ -339,12 +342,12 @@ int main(){
     //Asignar a cada una de las transmisiones una de las variables creadas
     getline(transmission1, t1);                     
     getline(transmission2, t2);
-    getline(transmission3, t3);
+    //getline(transmission3, t3);
 
     //Enviar las transmisiones acumuladas en las vaariables hacía el vector de transmisiones
     transmissionN.push_back(t1);                    
     transmissionN.push_back(t2);
-    transmissionN.push_back(t3);
+    //transmissionN.push_back(t3);
 
     codeFoundOutput(outputResult, transmissionN, mcodeN);
     findPalindrome(outputResult, transmissionN);
