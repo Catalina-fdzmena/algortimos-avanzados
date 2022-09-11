@@ -38,25 +38,25 @@ using namespace std;
 //PARTE 1 ACTIVIDA INTEGRADORA 
 
 // Complejidad O(n)
-vector<int> longestProperPrefix(string patron){
+vector<int> longestProperPrefix(string patron) {
     int n = patron.length();
     //Longest proper prefix también cuenta con función de sufijo
     vector<int> longestProperPrefixVec(n, 0);             
-    int j=0, i=1;
+    int j = 0, i = 1;
     while (i < n){
-        if (patron[i] == patron[j]){    // Patrones coinciden
-            longestProperPrefixVec[i] = j+1;
+        if (patron[i] == patron[j]) {    // Patrones coinciden
+            longestProperPrefixVec[i] = j + 1;
             i++;
             j++;
         }
-        else{                        
+        else {                        
             // Si no hay patrones que coincidan
-            if (j == 0){     
+            if (j == 0) {     
                 //           
                 longestProperPrefixVec[i] = 0;
                 i++;
             }
-            else{                       
+            else {                       
                 //Regresa un índice 
                 j = longestProperPrefixVec[j-1];
             }
@@ -67,11 +67,11 @@ vector<int> longestProperPrefix(string patron){
 
 // ------ ALGORITMO Knuth-Morris-Pratt -----RECONOCER PATRONES 
 // Complejidad: O(n)
-pair< int, vector<int> > kmp (string &transmission, string code){
-    int found = 0;                          // times a code is present
-    vector<int> positionsMatching;             // indexes of where the code is found
+pair<int,vector<int>> kmp (string &transmission, string code){
+    int found = 0;                             // veces que codigo es encontrado
+    vector<int> positionsMatching;             // indices de donde el codigo es encontrado
     vector<int> longestProperPrefixVec = longestProperPrefix(code);
-    int j=0, i=0;
+    int j = 0, i = 0;
     int t = transmission.length();
     int p = code.length();
 
@@ -79,57 +79,41 @@ pair< int, vector<int> > kmp (string &transmission, string code){
         if (transmission[i] == code[j]){
             i++;
             j++;
-            if (j == p){                        
+            if (j == p) {                        
                 positionsMatching.push_back(i-p);  
                 j = longestProperPrefixVec[j-1];
                 found++;                        
             }
         }
-        else{
-            if (j == 0){
+        else {
+            if (j == 0) {
                 i++;
             }
-            else{
+            else {
                 j = longestProperPrefixVec[j-1];
             }
         }
     }
+
     return {found, positionsMatching};
 }
 
 // Complejidad: O(n*m)
 void codeFoundOutput (ofstream &outputResult, vector<string> &transmisiones, vector<string> &codigosMaliciosos){
-    if (outputResult.is_open()){
-        for (int i=0; i<codigosMaliciosos.size(); i++){
-                outputResult << "Código: " << codigosMaliciosos[i] << endl;
-            for (int j=0; j<transmisiones.size(); j++){
-                pair <int, vector<int> > foundCodes = kmp(transmisiones[j], codigosMaliciosos[i]);
-                outputResult << "Transmision"  << j+1 << ".txt"<< " ==> ";
-                //Encontrar número de recurrencias 
-                /*if (foundCodes.first > 0){
-                    outputResult << foundCodes.first << " veces " << endl;
-                    for (int k=0; k<foundCodes.second.size()-1; k++){
-                        outputResult << foundCodes.second[k] << ", ";
+    if (outputResult.is_open()) {
+        for (int i = 0; i < codigosMaliciosos.size(); i++) {
+            for (int j = 0; j < transmisiones.size(); j++) {
+                pair<int,vector<int>> foundCodes = kmp(transmisiones[j], codigosMaliciosos[i]);
+                if (foundCodes.first > 0) {
+                    outputResult << "true ";
+                    for (int k = 0; k < foundCodes.second.size(); k++) {
+                        outputResult << foundCodes.second[k] << " ";
                     }
-                    outputResult << foundCodes.second[foundCodes.second.size()-1] << endl;
+                } else {
+                    outputResult << "false";
                 }
-                else{
-                    outputResult << "0 veces" << endl;
-                }*/
+                outputResult << endl;
             }
-
-            //Output a generar 
-
-            //(true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición 
-
-            /*
-            *Generar un bool
-            *Lectura de archivo por archivo 
-            *Imprimir la secuencia -- Listo!
-            * espacio 
-            * posición en la cuál se encuentra -- 
-            * 
-            */
         }
     }
 }
@@ -139,23 +123,23 @@ void codeFoundOutput (ofstream &outputResult, vector<string> &transmisiones, vec
 //PARTE 2 ACT INTEGRADORA 
 //------------------------------ENCONTRAR CÓDIGO CON MALWARE -----------------------------------------------
 
-//----------------------------Utilizamos manacher para identificr fragmentos de código espejeados 
+//----------------------------Utilizamos manacher para identificar fragmentos de código espejeados 
 
 // Complejidad: O(n)
 
-pair<string, int> manacher(string text){
-	string T = "";                                  // new aux string
+pair<string, pair<int, int>> manacher(string text) {
+	string T = "";                                  // Nuevo string auxiliar
 	int n = text.length();
 	for (int i=0; i<n; i++){
-		T += "|";                                   // adding "|" between each charatcter
+		T += "|";                                   // Se agrega "|" entre cada caracter
 		T += text[i];
 	}
 	T += "|";
-	n = T.length();                                 // new length
+	n = T.length();                                 // Nueva longitud
 	vector<int> L(n);
 	L[0] = 0;
 	L[1] = 1;
-	int maxLong=0, maxCenter=0;
+	int maxLong = 0, maxCenter = 0;
 	bool exp;
 	for (int c=1, li=0, ri=2; ri<n; ri++){
 		li = c-(ri-c);
@@ -176,48 +160,44 @@ pair<string, int> manacher(string text){
 				exp = true;
 			}
 		}
-		else{
+		else {
 			L[ri] = 0;
 			exp = true;
 		}
-		if (exp){
+		if (exp) {
 			while((ri + L[ri] < n) && (ri - L[ri] > 0) && (T[ri - L[ri] - 1] == T[ri + L[ri] + 1])){
 				L[ri]++;
 			}
 		}
 		c = ri;
-		if (L[ri] > maxLong){
+		if (L[ri] > maxLong) {
 	    	maxLong = L[ri];
 	    	maxCenter = ri;
 	    }
 	}
 	int start = (maxCenter - maxLong) / 2;
+    int end = start + maxLong - 1;
 	string exit = "";
-	for (int i=start; i<(start+maxLong); i++){
-		exit+=text[i];
+	for (int i = start; i < (start + maxLong); i++){
+		exit += text[i];
 	}
-	return {exit, start};      // REGRESA PALINDROME Y POSICIÓN 
-    //missing this structure: 
 
-    //posiciónInicial posiciónFinal (para archivo de transmisión2) códigoMalicioso
+	return {exit, {start, end}}; // Regresa palindromo, posicion inicial y posicion final.
 }
 
 //---------------------ACUMULAR CÓDIGO MALICIOSO -------------
 //Malware se encuentra a manera de palindromes
 
 // Complejidad: O(n)
-void findPalindrome(ofstream &outputResult, vector<string> &transmisiones){
-    vector< pair<string, int> > palindromes;
-    for (int i=0; i<transmisiones.size(); i++){                
+void findPalindrome(ofstream &outputResult, vector<string> &transmisiones) {
+    vector<pair<string,pair<int, int>>> palindromes;
+    for (int i = 0; i < transmisiones.size(); i++) {                
         palindromes.push_back(manacher(transmisiones[i]));
     }
 
-    if (outputResult.is_open()){
-        outputResult << "Palíndromo más grande:" << endl;
-        for (int i=0; i<transmisiones.size(); i++){
-            outputResult << "\tTransmision" << i+1 << ".txt" << " ==> " << "Posición: " << palindromes[i].second << endl;
-            outputResult << "\t" << palindromes[i].first << endl;
-            outputResult << "\t----" << endl;
+    if (outputResult.is_open()) {
+        for (int i = 0; i < transmisiones.size(); i++) {
+            outputResult << palindromes[i].second.first << " " << palindromes[i].second.second << " " << palindromes[i].first << endl;
         }
     }
 }
@@ -276,12 +256,10 @@ string LCSS(string st1, string st2){
 
 // Complejidad: O(1)
 void getLongestSubstring (ofstream &outputResult, vector<string> transmisiones){
-    if (outputResult.is_open()){
-        outputResult << "Substring más largo:" << endl;
-        
-        outputResult << "\tSubstring más largo t1-t2 ==> " << LCSS(transmisiones[0], transmisiones[1]) << endl;
-        outputResult << "\tSubstring más largo t1-t3 ==> " << LCSS(transmisiones[0], transmisiones[2]) << endl;
-        outputResult << "\tSubstring más largo t2-t3 ==> " << LCSS(transmisiones[1], transmisiones[2]) << endl;
+    if (outputResult.is_open()) {
+        outputResult << LCSS(transmisiones[0], transmisiones[1]) << endl;
+        outputResult << LCSS(transmisiones[0], transmisiones[2]) << endl;
+        //outputResult << "\tSubstring más largo t2-t3 ==> " << LCSS(transmisiones[1], transmisiones[2]) << endl;
     }
 }
 
@@ -319,7 +297,7 @@ int main()
     //getline(transmission3, t3);
     transmisiones.push_back(t1);                    
     transmisiones.push_back(t2);
-    transmisiones.push_back(t3);
+    //transmisiones.push_back(t3);
 
     outputResult << "Parte 1" << endl;
     codeFoundOutput(outputResult, transmisiones, codigosMaliciosos);
