@@ -14,6 +14,7 @@ using namespace std;
 
 //Falta implementas ASCII y lesctura dentro del mismo
 
+/*
 long long prhf(string S){
     int n = S.length();
     int p = 64;   //Ya que n es un entero múltiplo de 4 y  (16 <= n <=64)
@@ -29,10 +30,13 @@ long long prhf(string S){
     return hashValue;
 
 }
+*/
 
 main(){
+    /*
     int n {};
     cin>>n;
     long long prhf(string S);
     return 0;
+    */
 }
