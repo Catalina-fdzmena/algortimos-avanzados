@@ -9,7 +9,12 @@
 
 //Add preprocessors
 #include <iostream>
-#include <cmath>
+//#include <cmath>    -aplicable sólo para versión 1
+#include <sstream>
+#include <fstream>
+#include <cstdio>
+#include <vector>
+
 using namespace std;
 
 //Falta implementas ASCII y lesctura dentro del mismo
@@ -39,4 +44,9 @@ main(){
     long long prhf(string S);
     return 0;
     */
+    //-------------------------------------------------------------------------------------------------------------
+   //Segunda versión de implementación de hash string
+
+   return 0;
+
 }
