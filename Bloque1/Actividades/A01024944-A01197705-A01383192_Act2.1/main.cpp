@@ -46,7 +46,24 @@ main(){
     */
     //-------------------------------------------------------------------------------------------------------------
    //Segunda versión de implementación de hash string
+    string palabra;
+    int n;
+	cin >> palabra;
+    cin >> n;
+    
+    ifstream inputfile(palabra);
+    if(!inputfile.is_open())
+    {
+        cout << "Error file: "<<palabra<<" not found"<<endl;
+        exit(EXIT_FAILURE);
+    }
+    if (((n % 4) != 0) || n < 4 || n > 64)
+    {
+        cout << "RANGE ERROR_ N value: "<<palabra<<" is not matching  must be multiple of 4 within a range of 4 and 64 "<<endl;
+        exit(EXIT_FAILURE);
 
-   return 0;
+    }
+
+    return 0;
 
 }
