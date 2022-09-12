@@ -209,59 +209,35 @@ void findPalindrome(ofstream &outputResult, vector<string> &transmisiones) {
 //--------------------------ENCONTRAR EL Longest Common Substring -------------------------------------- 
 
 // Complejidad: O(n*m)
-string LCSS(string st1, string st2) {
-    int longestCommonSS[MAX][MAX];
-    int position = 0, length = 0;           
+pair<string, pair<int, int>> LCSS(string st1, string st2) {
+    vector<vector<int>> suffix(st1.length() + 1, vector<int>(st2.length() + 1));
+    int lengthLCSS = 0;
+    int end = -1;
 
-    // Primera columna
-    for (int i = 0; i < st1.length(); i++) {
-        if (st1[i] == st2[0]) {
-            longestCommonSS[i][0] = 1;
-        }
-        else {
-            longestCommonSS[i][0] = 0;
-        }
-    }
-
-    // Revisar primer fila
-    for (int j = 0; j < st2.length(); j++) {
-        if (st1[0] == st2[j]) {
-            longestCommonSS[0][j] = 1;
-            length = 1;
-        }
-        else {
-            longestCommonSS[0][j] = 0;
-        }
-    }
-
-    // Continuar revisando txt para resto de valores 
-    for (int i = 1; i < st1.length(); i++){
-        for (int j = 1; j< st2.length(); j++){
-            if (st1[i] == st2[j]){
-                longestCommonSS[i][j] = longestCommonSS[i-1][j-1] + 1;
-                if (longestCommonSS[i][j] > length){
-                    length += 1;                                            // Actualizar la longitud si es sobrepasada
-                    position = i;                                           // Guardar posicion
+    for (int i = 0; i <= st1.length(); i++) {
+        for (int j = 0; j <= st2.length(); j++) {
+            if (i == 0 || j == 0) {
+                suffix[i][j] = 0;
+            } else if (st1[i - 1] == st2[j - 1]) {
+                suffix[i][j] = suffix[i - 1][j - 1] + 1;
+                if (lengthLCSS < suffix[i][j]) {
+                    lengthLCSS = suffix[i][j];
+                    end = i;
                 }
-            }
-            else {
-                longestCommonSS[i][j] = 0;
+            } else {
+                suffix[i][j] = 0;
             }
         }
     }
 
-    
-    //pair<string,pair<int,int>> lcssInformation;
-    //lcssInformation.first = st1.substr(position - length + 1, length);
-    //lcssInformation.second.first = position - length + 1;
-    //lcssInformation.second.second
-    return st1.substr(position - length + 1, length);
+    return {st1.substr(end - lengthLCSS, lengthLCSS), {end - lengthLCSS, end - 1}};
 }
 
 // Complejidad: O(1)
 void getLongestSubstring (ofstream &outputResult, vector<string> transmisiones) {
     if (outputResult.is_open()) {
-        outputResult << LCSS(transmisiones[0], transmisiones[1]) << endl;
+        pair<string,pair<int,int>> LCSSData = LCSS(transmisiones[0], transmisiones[1]);
+        outputResult << LCSSData.second.first << " " << LCSSData.second.second << " " << LCSSData.first << endl;
     }
 }
 
