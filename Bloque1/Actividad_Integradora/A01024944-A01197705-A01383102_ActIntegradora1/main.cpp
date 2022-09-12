@@ -7,7 +7,6 @@
 /*
 Input
     Nada, solamente deben existir los 5 archivos en la misma ruta donde se ejecuta el programa    
-
 Output
   Parte 1
     (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición    
@@ -245,64 +244,6 @@ void getLongestSubstring (ofstream &outputResult, vector<string> transmisiones) 
 /* ----------------------------------------------------------------
    ---------------------------------------------------------------- */
 
-<<<<<<< HEAD
-int main(){
-//Caso de prueba transmittion 3 no se va a usar, por lo que se dejará comentarizado en caso de que se determine implementarse
-
-    //Variables para transición y revisión de cada caso de prueba
-    string code1, code2, code3, t1, t2;   
-    //string t3;                     
-
-    ifstream codeDoc("mcode1.txt");
-    ifstream codeDoc2("mcode2.txt");
-    ifstream codeDoc3("mcode3.txt");                      // reading files
-    ifstream transmission1("transmission1.txt");
-    ifstream transmission2("transmission2.txt");
-    //ifstream transmission3("transmission3.txt");
-    ofstream outputResult("outputResult.txt");
-
-    //Vector que almacena lo detectado como malware
-    vector<string> mcodeN;  //Defined with N at the end, cause it has N values
-
-    //Crear vector  para almacenar transmiciones                          
-    vector<string> transmissionN;   //Defined with N at the end, cause it has N values               
-
-/*
-    //Enviar código hacía MCNODE para almacenar aquel correspondiente
-    getline(codeDoc, code1);                     
-    getline(codeDoc2, code2);
-    getline(codeDoc3, code3);
-    //Enviar detecciones de malware a los vectores correspondientes
-    codeDoc.push_back(code1);
-    codeDoc2.push_back(code2);
-    codeDoc3.push_back(code3);*/
-
-//Asignar variables a malware según el archivo así como inclusión a su mismo vector
-
-    if (getline(codeDoc, code1)){
-        mcodeN.push_back(code1);
-    }else if(getline(codeDoc2, code2)){
-        mcodeN.push_back(code2);
-    }else if(getline(codeDoc3, code3)){
-        mcodeN.push_back(code3);
-    }else{
-        cout<<"Document is not availabe to read malware"<<endl;
-    }
-
-    //Asignar a cada una de las transmisiones una de las variables creadas
-    getline(transmission1, t1);                     
-    getline(transmission2, t2);
-    //getline(transmission3, t3);
-
-    //Enviar las transmisiones acumuladas en las vaariables hacía el vector de transmisiones
-    transmissionN.push_back(t1);                    
-    transmissionN.push_back(t2);
-    //transmissionN.push_back(t3);
-
-    codeFoundOutput(outputResult, transmissionN, mcodeN);
-    findPalindrome(outputResult, transmissionN);
-    getLongestSubstring(outputResult, transmissionN);
-=======
 int main()
 {
     // Variables para transición y revisión de cada caso de prueba
@@ -343,7 +284,6 @@ int main()
 
     outputResult << "Parte 3" << endl;
     getLongestSubstring(outputResult, transmisiones);
->>>>>>> impresion_archivos
 
     return 0;
 }
