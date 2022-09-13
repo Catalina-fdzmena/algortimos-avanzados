@@ -102,12 +102,11 @@ main(){
         transform(tmp.begin(), tmp.end(), tmp.begin(), ::toupper);
 
         matrixResult = matrixResult + (tmp);
-
-
-
-        
     }
-    
+    //Print results 
+    cout << matrixResult <<endl;
+    inputfile.close();
+    return EXIT_SUCCESS;
 
     return 0;
 
