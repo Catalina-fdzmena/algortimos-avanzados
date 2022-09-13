@@ -14,6 +14,8 @@
 #include <fstream>
 #include <cstdio>
 #include <vector>
+#include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -61,8 +63,51 @@ main(){
     {
         cout << "RANGE ERROR_ N value: "<<palabra<<" is not matching  must be multiple of 4 within a range of 4 and 64 "<<endl;
         exit(EXIT_FAILURE);
-
     }
+    vector<vector<int>> bytesReader;
+    vector<int> rowChecker;
+
+    char letter = 0;
+    while (inputfile.get(letter))
+    {
+        rowChecker.push_back(letter);
+
+        if ((rowChecker.size() % n) == 0){
+            bytesReader.push_back(rowChecker);
+            rowChecker.clear();
+        }
+    }
+
+    if (rowChecker.size() < n){
+        //Calcular cuántos valores faltan de ser añadidos 
+        int missing = n - rowChecker.size();
+
+        for (int i = 0 ; i < missing ; i ++){
+            char letter = 'a';
+
+            rowChecker.push_back(letter);
+        }
+        bytesReader.push_back(rowChecker);
+    }
+    std::string matrixResult;
+    //Generar lectura de la matriz creada 
+    for(int i = 0; i < bytesReader.size(); i++){
+        int sum = 0;
+        for (int j = 0; j < n ; j++){
+            sum += bytesReader[i][j];
+        }
+        std::stringstream ss;
+        ss << setfill('0')<<setw(2)<<right<<std::hex<<(sum % 256);
+        string tmp = ss.str();
+        transform(tmp.begin(), tmp.end(), tmp.begin(), ::toupper);
+
+        matrixResult = matrixResult + (tmp);
+
+
+
+        
+    }
+    
 
     return 0;
 
