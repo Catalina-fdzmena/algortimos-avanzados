@@ -4,22 +4,12 @@
 // Andrea Catalina Fernandez Mena - A01197750
 // Carlos Milano - A01383102
 
+
 /*
-Input
-    Nada, solamente deben existir los 5 archivos en la misma ruta donde se ejecuta el programa    
-Output
-  Parte 1
-    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición    
-    (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode1.txt, un espacio y la posición
-    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
-    (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode2.txt, un espacio y la posición
-    (true | false) si es que el archivo transmission1.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
-    (true | false) si es que el archivo transmission2.txt contiene el código (secuencia de chars) contenido en el archivo mcode3.txt, un espacio y la posición
-  Parte2
-    posiciónInicial posiciónFinal (para archivo de transmisión1) códigoMalicioso
-    posiciónInicial posiciónFinal (para archivo de transmisión2) códigoMalicioso
-  Parte3
-    posiciónInicial posiciónFinal (de substring común más largo entre archivos de transmisión 1 y 2) longitudSubstringComún substringComún
+Instrucciones 
+1.- Correr el código 
+2.- Revisar .txt de nombre "output" para revisar casos de prueba deseados. 
+
 */
 
 #include <iostream>
