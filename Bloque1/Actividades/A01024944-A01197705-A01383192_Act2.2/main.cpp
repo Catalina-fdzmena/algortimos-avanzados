@@ -32,6 +32,8 @@ int main()
 	map<string, int> Map;
 	int suffix[n];
 
+//Single for implemented
+//Complejidad: O(n)
 	string sub = "";
 	for (int i = n - 1; i >= 0; i--)
 	{
@@ -39,6 +41,8 @@ int main()
 		Map[sub] = i;
 	}
 
+//Se implementa un for sensillo 
+//Complejidad: O(n)
 	int j = 0;
 	for (auto x : Map)
 	{
@@ -46,6 +50,8 @@ int main()
 		j++;
 	}
 
+//Se implementa un for anidado para arreglo de sufijos
+//Complejidad: O(n^2)
 	cout << "El arreglo de sufijos para " << palabra << " es el siguiente:" << endl;
 	for (int i = 0; i < n; i++)
 	{
