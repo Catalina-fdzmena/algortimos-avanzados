@@ -27,6 +27,8 @@ using namespace std;
 //PARTE 1 ACTIVIDA INTEGRADORA 
 
 // Complejidad O(n)
+//-------------ALGORITMO LOSNGEST PROPER PREFIX -----------------
+
 vector<int> longestProperPrefix(string patron) {
     int n = patron.length();
     //Longest proper prefix también cuenta con función de sufijo
