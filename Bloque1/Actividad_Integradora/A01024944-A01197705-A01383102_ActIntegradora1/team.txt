@@ -2,7 +2,7 @@
 Me enfoqué en el algoritmo de Longest Common Substring, desarrollo del main y en la impresión de los casos de prueba
 
 *Andrea Catalina Fernandez Mena - A01197750
-Me enfoqué en el desarrollo de algoritmos para parte 1 (Longest Proper Prefix, Knuth-Morris-Pratt ) y 
+Me enfoqué en el desarrollo de algoritmos utilizados para parte 1 (Longest Proper Prefix, Knuth-Morris-Pratt ) y 
 parte 2 (Manacher, find Palindromes) y desarrollo del main.
 
 *Carlos David Milano Duarte - A01383102
