@@ -1,0 +1,12 @@
+*Jose Emilio Alvear Cantu - A01024944
+Me enfoqué en el algoritmo de Longest Common Substring, desarrollo del main y en la impresión de los casos de prueba
+
+*Andrea Catalina Fernandez Mena - A01197750
+Me enfoqué en el desarrollo de algoritmos utilizados para parte 1 (Longest Proper Prefix, Knuth-Morris-Pratt ) y 
+parte 2 (Manacher, find Palindromes) y desarrollo del main.
+
+*Carlos David Milano Duarte - A01383102
+En esta actividad integradora mi aportacion fue ayudar a mis compañeros con los casos de prueba que necesitaban,
+ tambien investigue para poder ayudarles en lo que necesitaban para poder lograr la actividad, pero ellos dos 
+ fueron los que hicieron la mayor parte del trabajo porque tenian mas dominado el tema, aun asi me enseñaron 
+ a hacer las cosas para yo asi poder corregir ciertas cosas que faltaban
