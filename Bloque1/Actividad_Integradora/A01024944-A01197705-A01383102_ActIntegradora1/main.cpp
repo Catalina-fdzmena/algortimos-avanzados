@@ -208,6 +208,7 @@ void findPalindrome(ofstream &outputResult, vector<string> &transmisiones) {
 //--------------------------ENCONTRAR EL Longest Common Substring -------------------------------------- 
 
 // Complejidad: O(n*m)
+
 pair<string, pair<int, int>> LCSS(string st1, string st2) {
     vector<vector<int>> suffix(st1.length() + 1, vector<int>(st2.length() + 1));
     int lengthLCSS = 0;
