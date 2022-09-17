@@ -8,7 +8,7 @@
 */
 
 //Instrucciones: 
-//Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
+//Ingresar desde cmd y colocar la instrucción main.exe < quijote1.txt > nombreParaOutput.txt 
 
 //Add preprocessors
 #include <iostream>
