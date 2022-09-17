@@ -20,7 +20,7 @@
 #include <algorithm>
 
 using namespace std;
-
+//Whole function complexity
 // Complejidad: O(n)
 int main(){
     string palabra;
