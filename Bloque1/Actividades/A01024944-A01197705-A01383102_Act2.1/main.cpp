@@ -8,10 +8,7 @@
 */
 
 //Instrucciones: 
-// Ingresar desde bash de linux g++ -g main.cpp
-// Despues proceder a escribir ./a.out <test00.txt
-// o
-// Ingresar desde cmd y colocar la instrucción main.exe < input0.txt > nombreParaOutput.txt 
+// Ingresar desde cmd y colocar la instrucción ./a.out < input0.txt > nombreParaOutput.txt 
 
 //Add preprocessors
 #include <iostream>
