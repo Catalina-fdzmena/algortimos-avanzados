@@ -7,9 +7,11 @@
 * Carlos Milano - A01383102
 */
 
+//Instrucciones: 
+//Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
+
 //Add preprocessors
 #include <iostream>
-//#include <cmath>    -aplicable sólo para versión 1
 #include <sstream>
 #include <fstream>
 #include <cstdio>
@@ -19,38 +21,11 @@
 
 using namespace std;
 
-//Falta implementas ASCII y lesctura dentro del mismo
-
-/*
-long long prhf(string S){
-    int n = S.length();
-    int p = 64;   //Ya que n es un entero múltiplo de 4 y  (16 <= n <=64)
-    int m = 1e9 + 9;
-    long long hashValue  = 0;
-    long long power = 1;
-    for (int i = 0; i < n ; i++){
-        //Definir como obtener el valor a partir de la hashing string
-        hashValue = (hashValue + (S[i] - 'a' + 1) * power) % m;
-        //Definir como obtener el valor de potencia para función hashing
-        power = (power * p) % m;
-    }
-    return hashValue;
-
-}
-*/
-
-main(){
-    /*
-    int n {};
-    cin>>n;
-    long long prhf(string S);
-    return 0;
-    */
-    //-------------------------------------------------------------------------------------------------------------
-   //Segunda versión de implementación de hash string
+// Complejidad: O(n)
+int main(){
     string palabra;
     int n;
-	cin >> palabra;
+    cin >> palabra;
     cin >> n;
     
     ifstream inputfile(palabra);
@@ -64,8 +39,8 @@ main(){
         cout << "RANGE ERROR_ N value: "<<palabra<<" is not matching  must be multiple of 4 within a range of 4 and 64 "<<endl;
         exit(EXIT_FAILURE);
     }
-    vector<vector<int>> bytesReader;
-    vector<int> rowChecker;
+    vector<vector<char>> bytesReader;
+    vector<char> rowChecker;
 
     char letter = 0;
     while (inputfile.get(letter))
@@ -79,7 +54,6 @@ main(){
     }
 
     if (rowChecker.size() < n){
-        //Calcular cuántos valores faltan de ser añadidos 
         int missing = n - rowChecker.size();
 
         for (int i = 0 ; i < missing ; i ++){
@@ -90,7 +64,6 @@ main(){
         bytesReader.push_back(rowChecker);
     }
     std::string matrixResult;
-    //Generar lectura de la matriz creada 
     for(int i = 0; i < bytesReader.size(); i++){
         int sum = 0;
         for (int j = 0; j < n ; j++){
@@ -103,7 +76,6 @@ main(){
 
         matrixResult = matrixResult + (tmp);
     }
-    //Print results 
     cout << matrixResult <<endl;
     inputfile.close();
     return EXIT_SUCCESS;
