@@ -28,6 +28,7 @@ int main(){
     cin >> palabra;
     cin >> n;
     
+    //Complejidad O(n)
     ifstream inputfile(palabra);
     if(!inputfile.is_open())
     {
@@ -42,6 +43,7 @@ int main(){
     vector<vector<char>> bytesReader;
     vector<char> rowChecker;
 
+    //Complejidad O(n)
     char letter = 0;
     while (inputfile.get(letter))
     {
@@ -52,7 +54,7 @@ int main(){
             rowChecker.clear();
         }
     }
-
+    //Complejidad O(n^2)
     if (rowChecker.size() < n){
         int missing = n - rowChecker.size();
 
@@ -63,6 +65,7 @@ int main(){
         }
         bytesReader.push_back(rowChecker);
     }
+    //Complejidad O(n^2)
     std::string matrixResult;
     for(int i = 0; i < bytesReader.size(); i++){
         int sum = 0;
