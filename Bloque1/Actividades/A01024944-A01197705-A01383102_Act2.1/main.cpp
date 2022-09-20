@@ -8,7 +8,7 @@
 */
 
 //Instrucciones: 
-//Ingresar desde cmd y colocar la instrucción main.exe < quijote1.txt > nombreParaOutput.txt 
+// Ingresar desde cmd y colocar la instrucción ./a.out < input0.txt > nombreParaOutput.txt 
 
 //Add preprocessors
 #include <iostream>
@@ -40,7 +40,7 @@ int main(){
         cout << "RANGE ERROR_ N value: "<<palabra<<" is not matching  must be multiple of 4 within a range of 4 and 64 "<<endl;
         exit(EXIT_FAILURE);
     }
-    vector<vector<char>> bytesReader;
+    vector<vector<char> > bytesReader;
     vector<char> rowChecker;
 
     //Complejidad O(n)
