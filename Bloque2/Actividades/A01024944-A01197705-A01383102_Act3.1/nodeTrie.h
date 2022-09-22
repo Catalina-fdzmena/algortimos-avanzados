@@ -47,4 +47,12 @@ bool nodeTrie::getIsLeaf() {
   return isLeaf; 
 }
 
+char nodeTrie::getLetter() { 
+  return letter; 
+}
+
+void nodeTrie::setIsLeaf(bool value) { 
+  isLeaf = value; 
+}
+
 #endif // _NODETRIE_H

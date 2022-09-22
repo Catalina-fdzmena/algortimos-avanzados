@@ -13,21 +13,29 @@
 *    ./main
 **/
 #include <iostream>
-// #include <iomanip>
+#include <string>
 #include "trie.h"
 
 int main() {
   trie T;
-  std::cout << "Insert: hola, holamundo y ab" << std::endl;
-  T.insert("hola");
-  T.insert("holamundo");
-  T.insert("ab");
+  std::string palabra;
+  int N, M;
   
-  std::cout << "search(hola) " << std::boolalpha << T.search("hola") << std::endl;
-  std::cout << "search(hole) " << std::boolalpha << T.search("hole") << std::endl;
-  std::cout << "search(holamundo) " << std::boolalpha << T.search("holamundo") << std::endl;
-  std::cout << "search(holam) " << std::boolalpha << T.search("holam") << std::endl;
-  std::cout << "search(ab) " << std::boolalpha << T.search("ab") << std::endl;
+  // Se leen palabras y se insertan
+  std::cin >> N;
+  for (int i = 0; i < N; i++) {
+    std::cin >> palabra;
+    T.insert(palabra);
+  }
+
+  // Busqueda dfs por palabra
+
+  // Se leen palabras a buscar y se imprimen los booleanos
+  std::cin >> M;
+  for (int i = 0; i < M; i++) {
+    std::cin >> palabra;
+    std::cout << std::boolalpha << T.search(palabra) << std::endl;
+  }
 
   return 0;
 }
