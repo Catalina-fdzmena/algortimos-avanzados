@@ -9,6 +9,7 @@
 class trie {
 private:
   nodeTrie *root;
+  void destroy(nodeTrie *node);
 
 public:
   trie();
@@ -23,9 +24,18 @@ trie::trie() {
 }
 
 trie::~trie() {
-  // to-do
-  // Implementa un recorrido del trie para
-  // liberar su memoria
+  destroy(root);
+}
+
+void trie::destroy(nodeTrie *node) {
+  if (node != nullptr) {
+    for (nodeTrie *childNode : node->getChild()) {
+      if (childNode != nullptr) {
+        destroy(childNode);
+      }
+    }
+    delete(node);
+  }
 }
 
 void trie::insert(std::string word) {

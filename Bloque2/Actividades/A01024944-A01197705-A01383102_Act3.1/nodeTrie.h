@@ -15,6 +15,7 @@ public:
   nodeTrie();
   nodeTrie(char c, nodeTrie *p);
   nodeTrie *getChild(char c);
+  std::vector<nodeTrie *> getChild();
   void setChild(nodeTrie *ptrChild);
   bool getIsLeaf();
   void setIsLeaf(bool value);
@@ -39,20 +40,24 @@ nodeTrie *nodeTrie::getChild(char c) {
   return child[c - 'a']; 
 }
 
+std::vector<nodeTrie *> nodeTrie::getChild() {
+  return child;
+}
+
 void nodeTrie::setChild(nodeTrie *ptrChild) {
   child[ptrChild->letter - 'a'] = ptrChild;
 }
 
 bool nodeTrie::getIsLeaf() { 
-  return isLeaf; 
+  return isLeaf;
 }
 
 char nodeTrie::getLetter() { 
-  return letter; 
+  return letter;
 }
 
 void nodeTrie::setIsLeaf(bool value) { 
-  isLeaf = value; 
+  isLeaf = value;
 }
 
 #endif // _NODETRIE_H
