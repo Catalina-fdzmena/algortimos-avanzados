@@ -1,0 +1,9 @@
+cruel
+hola
+mundo
+sopa
+sope
+true
+true
+false
+true

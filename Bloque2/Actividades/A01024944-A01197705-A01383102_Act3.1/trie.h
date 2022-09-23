@@ -10,6 +10,7 @@ class trie {
 private:
   nodeTrie *root;
   void destroy(nodeTrie *node);
+  void dfsHelper(nodeTrie *node, std::string stringHelper);
 
 public:
   trie();
@@ -63,9 +64,21 @@ bool trie::search(std::string word) {
 }
 
 void trie::dfs() {
-  // to-do
-  // Implementa un recorrido DFS del trie
-  // para imprimir todas las palabras en orden alfabetico
+  std::string stringHelper = "";
+  dfsHelper(root, stringHelper);
+}
+
+void trie::dfsHelper(nodeTrie *node, std::string stringHelper) {
+  if (node != nullptr) {
+    for (nodeTrie *childNode : node->getChild()) {
+      if (childNode != nullptr) {
+        if (childNode->getIsLeaf()) {
+          std::cout << stringHelper + childNode->getLetter() << std::endl;
+        }
+        dfsHelper(childNode, stringHelper + childNode->getLetter());
+      }
+    }
+  }
 }
 
 #endif // _TRIE_H

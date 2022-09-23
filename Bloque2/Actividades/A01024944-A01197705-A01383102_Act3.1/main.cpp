@@ -29,6 +29,7 @@ int main() {
   }
 
   // Busqueda dfs por palabra
+  T.dfs();
 
   // Se leen palabras a buscar y se imprimen los booleanos
   std::cin >> M;
