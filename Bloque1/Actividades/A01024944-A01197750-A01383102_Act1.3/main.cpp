@@ -6,7 +6,7 @@
 // Profesor Eduardo: ertello@tec.mx
 
 //Instrucciones: 
-//Ingresar desde cmd y colocar la instrucción main.exe < casoDePrueba.txt > nombreParaOutput.txt  
+//Ingresar desde cmd y colocar la instrucción main.exe < test00.txt > nombreParaOutput.txt  
 
 
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
