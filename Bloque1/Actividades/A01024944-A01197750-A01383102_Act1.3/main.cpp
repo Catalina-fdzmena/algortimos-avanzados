@@ -5,10 +5,14 @@
 
 // Profesor Eduardo: ertello@tec.mx
 
-//Instrucciones: 
-//Ingresar desde cmd y colocar la instrucción main.exe < test00.txt > nombreParaOutput.txt  
+/*Instrucciones: 
 
+1.-Ingresar desde cmd a bash de linux 
+2.- Hacer direccionamiento por medio de cd hasta el archivo 
+3.- Colocar el comando g++ -g main.cpp
+4.- Colocar el comando  ./a.out < nombre del test > nombre del output
 
+*/
 // Algoritmo de backtracking basado en el algoritmo de https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
 
 // Algoritmo Laberinto Branch and Bound basado en: https://ocw.snu.ac.kr/sites/default/files/NOTE/498.pdf
