@@ -1,3 +1,11 @@
+/*
+--Actividad 3.2--
+--Integrantes de Equipo:
+	* Jose Emilio Alvear Cantu - A01024944
+	* Andrea Catalina Fernandez Mena - A01197750
+	* Carlos Milano - A01383102
+*/
+
 /** 
 * Ejemplo que implementa Grafos dirigidos ponderados con una
 * Lista de adyacencia y los algoritmos DFS y BFS
