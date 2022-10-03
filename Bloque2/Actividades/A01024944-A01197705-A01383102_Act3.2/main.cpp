@@ -6,6 +6,10 @@
 	* Carlos Milano - A01383102
 */
 
+//Info recabada de: 
+ // https://www.geeksforgeeks.org/implement-min-heap-using-stl/
+
+
 /** 
 * Ejemplo que implementa Grafos dirigidos ponderados con una
 * Lista de adyacencia y los algoritmos DFS y BFS
