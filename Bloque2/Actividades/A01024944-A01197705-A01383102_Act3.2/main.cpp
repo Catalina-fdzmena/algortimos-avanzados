@@ -2,7 +2,7 @@
 --Actividad 3.2--
 --Integrantes de Equipo:
 	* Jose Emilio Alvear Cantu - A01024944
-	* Andrea Catalina Fernandez Mena - A01197750
+	* Andrea Catalina Fernandez Mena - A01197705
 	* Carlos Milano - A01383102
 */
 
