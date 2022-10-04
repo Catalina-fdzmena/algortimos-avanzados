@@ -32,15 +32,14 @@
 
 
 int main() {
-  std::cout << "Ejemplo de grafos (representacion y recorridos)!" << std::endl;
   std::stringstream inputInfo;
   inputInfo << std::cin.rdbuf(); 
-  // Construye un grafo a partir de la consola usando
-  // representacion de Lista de adyacencia
+
   Graph g1;
   g1.readGraph(inputInfo);
-  g1.print();
-  g1.DFS(1);
-  g1.BFS(1);
+
+  std::cout << "Dijkstra, shortest paths from source vertex" << std::endl;
+  g1.shortestPath(1);
+  std::cout << "Floyd-Warshall, all pairs shortest path" << std::endl;
   g1.floydWarshall();
 }

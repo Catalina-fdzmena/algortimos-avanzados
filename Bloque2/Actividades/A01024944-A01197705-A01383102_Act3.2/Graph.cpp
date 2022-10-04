@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include <limits.h>
+#include <iomanip>
 
 #define INF INT_MAX
 
@@ -27,12 +28,8 @@ void Graph::split(std::string line, std::vector<int> &res) {
 
 void Graph::readGraph(std::istream &input) {
   std::string line;
-  int i = 0;
+  int i = 1;
   while (std::getline(input, line)) {
-    if (i == 0) { // Ignorar primera linea de texto
-      i++;
-      continue;
-    }
     if (i == 1) {
       std::vector<int> res;
       split(line, res);
@@ -50,6 +47,7 @@ void Graph::readGraph(std::istream &input) {
       i++;
       continue; 
     }
+
     std::vector<int> res;
     split(line, res);
     int u = res[0];
@@ -152,15 +150,15 @@ void Graph::floydWarshall() {
 
   // Llenar matriz con la lista de adyacencias 
   for (int nodo = 1; nodo <= numNodes; nodo++){
-    std::list<std::pair<int,int>> aristas = adjList[nodo];
+    std::list<std::pair<int,int>> nodosAdyacentes = adjList[nodo];
     std::list<std::pair<int,int>>::iterator it;
-    for (it = aristas.begin(); it != aristas.end(); ++it) {
+    for (it = nodosAdyacentes.begin(); it != nodosAdyacentes.end(); ++it) {
       std::pair<int,int> par = *it;
       dist[nodo - 1][par.first - 1] = par.second;
     }
   }
 
-  
+  // Se actualiza la matriz con las distancias y el algoritmo de floyd warshal
   for (int k = 0; k < numNodes; k++) {
     for (int i = 0; i < numNodes; i++) {
       for (int j = 0; j < numNodes; j++) {
@@ -171,56 +169,47 @@ void Graph::floydWarshall() {
     }
   }
 
+  // Imprimir matriz de distancias
   for (int i = 0; i < dist.size(); i++) {
     for (int j = 0; j < dist[i].size(); j++) {
       if (dist[i][j] == INF) {
-        std::cout << "INF" << " ";
+        std::cout << std::left << std::setw(8) << "INF";
       } else {  
-        std::cout << dist[i][j] << " "; 
+        std::cout << std::left << std::setw(8) << dist[i][j]; 
       }
     }
     std::cout << std::endl;
   }
 }
 
-/*
-void Graph::shortestPath(int src)
-{
-    priority_queue<std::pair<int, int>, 
-    vector<std::pair<int, int>>,
-    greater<std::pair<int, int>> >
-        pq;
+void Graph::shortestPath(int src) {
+  std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
+  std::vector<int> dist(numNodes + 1, INF);
+  pq.push(std::make_pair(0, src));
+  dist[src] = 0;
 
-    vector<int> distancia(numNodes+1, distToInfinity);
+  while (!pq.empty()) {
+    int u = pq.top().second;
+    pq.pop();
 
-    pq.push(std::crearPair(0, src));
-    distancia[src] = 0; //se denomina distanciancia 0 (estando en src)
- 
+    std::list<std::pair<int,int>> nodosAdyacentes = adjList[u];
+    std::list<std::pair<int,int>>::iterator it;
+    for (it = nodosAdyacentes.begin(); it != nodosAdyacentes.end(); ++it) {
+      std::pair<int,int> par = *it;
+      int v = par.first;
+      int peso = par.second;
 
-    while (!pq.empty()) {
-        int u = pq.top().second; 
-        pq.pop();
-
-        std::list<std::pair<int,int>> parNodosLista = adjList[u];
-        std::list<std::pair<int,int>>::iterator loopCheck;
-        for (it = parNodosLista.begin(); it != parNodosLista.end(); ++loopCheck) {
-          std::pair<int,int> par = *loopCheck; //Leer los pares
-          int v = par.first; //nodo
-          int pesoArista = par.second; 
-
-          if (distancia[v] > distancia[u] + pesoArista) {
-            //Acumlar cambios en distanciaancia de vertices
-            distancia[v] = distancia[u] + pesoArista;
-            pq.push(std::crearPair(distancia[v], v));
-          }
-        }
-    }
-
-    // Print
-    for (int i = 1; i < numNodes+1; ++i)
-      if (distancia[i] == distToInfinity) {
-        std::cout << i << " distToInfinity" << std::endl;
-      } else {
-        std::cout << i << " " << distancia[i] << std::endl;
+      if (dist[v] > dist[u] + peso) {
+        dist[v] = dist[u] + peso;
+        pq.push(std::make_pair(dist[v], v));
       }
-}*/
+    }
+  }
+
+  for (int i = 1; i < numNodes + 1; i++)
+    if (dist[i] == INF) {
+      std::cout << i << ": INF" << std::endl;
+    } else {
+      std::cout << i << ": " << dist[i] << std::endl;
+    }
+}
