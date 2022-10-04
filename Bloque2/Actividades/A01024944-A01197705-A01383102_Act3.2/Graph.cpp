@@ -1,5 +1,7 @@
-
 #include "Graph.h"
+#include <limits.h>
+
+#define INF INT_MAX
 
 Graph::Graph() {
   numNodes = 0;
@@ -142,3 +144,83 @@ void Graph::BFS(int v) {
   }
   std::cout << std::endl;
 }
+
+void Graph::floydWarshall() {
+  // Inicializar matriz de las distancias mas cortas
+  std::vector<std::vector<int>> dist(numNodes, std::vector<int> (numNodes, INF));
+  for (int i = 0; i < dist.size(); i++) { dist[i][i] = 0; }
+
+  // Llenar matriz con la lista de adyacencias 
+  for (int nodo = 1; nodo <= numNodes; nodo++){
+    std::list<std::pair<int,int>> aristas = adjList[nodo];
+    std::list<std::pair<int,int>>::iterator it;
+    for (it = aristas.begin(); it != aristas.end(); ++it) {
+      std::pair<int,int> par = *it;
+      dist[nodo - 1][par.first - 1] = par.second;
+    }
+  }
+
+  
+  for (int k = 0; k < numNodes; k++) {
+    for (int i = 0; i < numNodes; i++) {
+      for (int j = 0; j < numNodes; j++) {
+        if (dist[i][j] > (dist[i][k] + dist[k][j]) && (dist[k][j] != INF && dist[i][k] != INF)) {
+          dist[i][j] = dist[i][k] + dist[k][j];
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < dist.size(); i++) {
+    for (int j = 0; j < dist[i].size(); j++) {
+      if (dist[i][j] == INF) {
+        std::cout << "INF" << " ";
+      } else {  
+        std::cout << dist[i][j] << " "; 
+      }
+    }
+    std::cout << std::endl;
+  }
+}
+
+/*
+void Graph::shortestPath(int src)
+{
+    priority_queue<std::pair<int, int>, 
+    vector<std::pair<int, int>>,
+    greater<std::pair<int, int>> >
+        pq;
+
+    vector<int> distancia(numNodes+1, distToInfinity);
+
+    pq.push(std::crearPair(0, src));
+    distancia[src] = 0; //se denomina distanciancia 0 (estando en src)
+ 
+
+    while (!pq.empty()) {
+        int u = pq.top().second; 
+        pq.pop();
+
+        std::list<std::pair<int,int>> parNodosLista = adjList[u];
+        std::list<std::pair<int,int>>::iterator loopCheck;
+        for (it = parNodosLista.begin(); it != parNodosLista.end(); ++loopCheck) {
+          std::pair<int,int> par = *loopCheck; //Leer los pares
+          int v = par.first; //nodo
+          int pesoArista = par.second; 
+
+          if (distancia[v] > distancia[u] + pesoArista) {
+            //Acumlar cambios en distanciaancia de vertices
+            distancia[v] = distancia[u] + pesoArista;
+            pq.push(std::crearPair(distancia[v], v));
+          }
+        }
+    }
+
+    // Print
+    for (int i = 1; i < numNodes+1; ++i)
+      if (distancia[i] == distToInfinity) {
+        std::cout << i << " distToInfinity" << std::endl;
+      } else {
+        std::cout << i << " " << distancia[i] << std::endl;
+      }
+}*/

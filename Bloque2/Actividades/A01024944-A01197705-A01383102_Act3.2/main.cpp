@@ -42,4 +42,5 @@ int main() {
   g1.print();
   g1.DFS(1);
   g1.BFS(1);
+  g1.floydWarshall();
 }
