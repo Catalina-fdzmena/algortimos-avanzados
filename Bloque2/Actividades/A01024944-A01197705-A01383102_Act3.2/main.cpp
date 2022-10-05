@@ -25,6 +25,15 @@
 *    g++ -std=c++17 -O3 -o main *.cpp 
 * Ejecucion:
 *    ./main < TestCases/test01.txt
+
+
+== Ejecución desde CMD ==
+1.- Direccionarse a carpeta indicada
+2.- colocar desde la terminal:   g++ -o main.exe main.cpp graph.cpp
+3.- Posteriormente a correr, una vez que se muestre que se creo un archivo main.exe colocar de la terminal lo siguiente: 
+                    main.exe < TestCases\test01.txt     (o el test case que quiera revisar)
+4. - Su resultado se imprimirá en la terminal :) 
+
 **/
 
 #include <iostream>
