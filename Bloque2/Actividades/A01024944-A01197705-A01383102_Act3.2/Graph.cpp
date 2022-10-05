@@ -143,6 +143,8 @@ void Graph::BFS(int v) {
   std::cout << std::endl;
 }
 
+// Complejidad de tiempo: O(V^3)
+// Complejidad de espacio: O(V^2)
 void Graph::floydWarshall() {
   // Inicializar matriz de las distancias mas cortas
   std::vector<std::vector<int>> dist(numNodes, std::vector<int> (numNodes, INF));
@@ -182,6 +184,8 @@ void Graph::floydWarshall() {
   }
 }
 
+// Complejidad de tiempo: O((|V + E|)log|V|)
+// Complejidad de espacio: O(V + E)
 void Graph::shortestPath(int src) {
   std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
   std::vector<int> dist(numNodes + 1, INF);
