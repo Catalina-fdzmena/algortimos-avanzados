@@ -16,6 +16,7 @@
 *
 * Compilacion para debug:  
 *    g++ -std=c++17 -g -o main *.cpp 
+
 * Ejecucion con valgrind:
 *    nix-env -iA nixpkgs.valgrind
 *    valgrind --leak-check=full ./main < TestCases/test01.txt
