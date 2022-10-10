@@ -84,10 +84,9 @@ void Graph::readGraph(std::istream &input) {
     split(line, res);
     int u = res[0];
     int v = res[1];
-
-    // Grafos no dirigidos
     adjList[u].push_back(v);
     adjList[v].push_back(u);
+
     i++;
   }
 }
@@ -107,9 +106,8 @@ void Graph::print() {
 }
 
 bool Graph::colorBipartiteGraph(int vertex, int color) {
-  if (colores[vertex] != -1 && colores[vertex] != color) {
+  if (colores[vertex] != -1 && colores[vertex] != color)
     return false;
-  }
 
   colores[vertex] = color;
   bool answer = true;
@@ -119,7 +117,7 @@ bool Graph::colorBipartiteGraph(int vertex, int color) {
   for (it = g.begin(); it != g.end(); ++it) {
     int verticeAdyacente = *it;
     if (colores[verticeAdyacente] == -1)
-      answer = colorBipartiteGraph(verticeAdyacente, color);
+      answer = colorBipartiteGraph(verticeAdyacente, 1 - color);
     if (colores[verticeAdyacente] != -1 && colores[verticeAdyacente] != 1 - color)
       return false;
     if (!answer)
