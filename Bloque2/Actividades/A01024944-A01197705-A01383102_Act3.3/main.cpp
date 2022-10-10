@@ -11,7 +11,6 @@ Grafos bipartitas
 #include <iostream>
 #include <sstream>
 #include "Graph.h"
-using namespace std;
 
 int main() {
 	stringstream inputInfo;
