@@ -18,10 +18,8 @@ class Graph {
 private:
   int numNodes;
   int numEdges;
-  // Lista de adyacencia
-  // vector de listas ligadas de pares (vertice, peso)
-  std::vector<std::list<std::pair<int, int>>> adjList;
-  
+  // Lista de adyacencia para grafo no dirijido
+  std::vector<std::list<int>> adjList;
   void split(std::string line, std::vector<int> &res);
   
 public:
@@ -68,11 +66,11 @@ void Graph::readGraph(std::istream &input) {
       numEdges = res[2];
       // Reservar memoria para los renglones 
       // de la lista de adyacencia (renglon 0 no utilizado) 
-      adjList.resize(numNodes+1);
+      adjList.resize(numNodes + 1);
       // Declara una lista vacia para cada renglon y 
       // la almacena en el vector
       for (int k = 1; k <= numNodes; k++) {
-        std::list<std::pair<int,int>> tmpList; // lista de pares(nodo, peso)
+        std::list<int> tmpList;
         adjList[k] = tmpList; 
       }
       i++;
@@ -83,10 +81,10 @@ void Graph::readGraph(std::istream &input) {
     split(line, res);
     int u = res[0];
     int v = res[1];
-    int weight = res[2];    
-    // Grafos dirigidos agrega solo la arista (u,v)
-    // Grafo ponderado guarda pares(nodo, peso)
-    adjList[u].push_back(std::make_pair(v, weight));
+
+    // Grafos no dirigidos
+    adjList[u].push_back(v);
+    adjList[v].push_back(u);
     i++;
   }
 }
@@ -95,16 +93,17 @@ void Graph::print() {
   std::cout << "Adjacency List" << std::endl;
   for (int u = 1; u <= numNodes; u++){
     std::cout << "vertex " << u << ":";
-    std::list<std::pair<int,int>> g = adjList[u];
-    std::list<std::pair<int,int>>::iterator it;
+    std::list<int> g = adjList[u];
+    std::list<int>::iterator it;
     for (it = g.begin(); it != g.end(); ++it) {
-      std::pair<int,int> par = *it;
-      std::cout << '\t' << "{"<< par.first << "," << par.second << "}";
+      int verticeAdyacente = *it;
+      std::cout << '\t' << verticeAdyacente;
     }
     std::cout << std::endl;
   }
 }
 
+/*
 void Graph::DFS(int v) {
   // Declaramos un set del STL de C++ (elementos unicos y ordenados)
   std::set<int> visited;
@@ -247,7 +246,7 @@ void Graph::shortestPath(int src) {
     } else {
       std::cout << i << ": " << dist[i] << std::endl;
     }
-}
+}*/
 
 
 #endif // _GRAPH_H_

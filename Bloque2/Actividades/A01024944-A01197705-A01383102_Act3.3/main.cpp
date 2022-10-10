@@ -18,6 +18,7 @@ int main() {
 
   	Graph g1;
   	g1.readGraph(inputInfo);
+	g1.print();
 
 	return 0;
 }
