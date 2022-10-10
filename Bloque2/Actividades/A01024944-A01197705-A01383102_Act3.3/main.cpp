@@ -11,10 +11,11 @@ Grafos bipartitas
 #include <iostream>
 #include <sstream>
 #include "Graph.h"
+using namespace std;
 
 int main() {
-	std::stringstream inputInfo;
-  	inputInfo << std::cin.rdbuf(); 
+	stringstream inputInfo;
+  	inputInfo << cin.rdbuf(); 
 
   	Graph g1;
   	g1.readGraph(inputInfo);
