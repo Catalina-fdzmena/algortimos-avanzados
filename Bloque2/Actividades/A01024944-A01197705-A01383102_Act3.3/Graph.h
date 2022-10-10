@@ -12,7 +12,6 @@
 #include <limits.h>
 #include <iomanip>
 
-#define INF INT_MAX
 
 class Graph {
 private:
@@ -20,6 +19,7 @@ private:
   int numEdges;
   // Lista de adyacencia para grafo no dirijido
   std::vector<std::list<int>> adjList;
+  std::vector<int> colores;
   void split(std::string line, std::vector<int> &res);
   
 public:
@@ -31,6 +31,7 @@ public:
   void BFS(int v);
   void shortestPath(int src);
   void floydWarshall();
+  bool colorBipartiteGraph(int vertex, int color);
 };
 
 Graph::Graph() {
@@ -67,11 +68,13 @@ void Graph::readGraph(std::istream &input) {
       // Reservar memoria para los renglones 
       // de la lista de adyacencia (renglon 0 no utilizado) 
       adjList.resize(numNodes + 1);
+      colores.resize(numNodes + 1);
       // Declara una lista vacia para cada renglon y 
       // la almacena en el vector
       for (int k = 1; k <= numNodes; k++) {
         std::list<int> tmpList;
-        adjList[k] = tmpList; 
+        adjList[k] = tmpList;
+        colores[k] = -1;
       }
       i++;
       continue; 
@@ -101,6 +104,29 @@ void Graph::print() {
     }
     std::cout << std::endl;
   }
+}
+
+bool Graph::colorBipartiteGraph(int vertex, int color) {
+  if (colores[vertex] != -1 && colores[vertex] != color) {
+    return false;
+  }
+
+  colores[vertex] = color;
+  bool answer = true;
+
+  std::list<int> g = adjList[vertex];
+  std::list<int>::iterator it;
+  for (it = g.begin(); it != g.end(); ++it) {
+    int verticeAdyacente = *it;
+    if (colores[verticeAdyacente] == -1)
+      answer = colorBipartiteGraph(verticeAdyacente, color);
+    if (colores[verticeAdyacente] != -1 && colores[verticeAdyacente] != 1 - color)
+      return false;
+    if (!answer)
+      return false;
+  }
+
+  return true;
 }
 
 /*

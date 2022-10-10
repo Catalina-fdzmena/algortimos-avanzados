@@ -13,12 +13,12 @@ Grafos bipartitas
 #include "Graph.h"
 
 int main() {
-	stringstream inputInfo;
-  	inputInfo << cin.rdbuf(); 
+	std::stringstream inputInfo;
+  	inputInfo << std::cin.rdbuf(); 
 
   	Graph g1;
   	g1.readGraph(inputInfo);
-	g1.print();
+	std::cout << std::boolalpha << g1.colorBipartiteGraph(1, 1);
 
 	return 0;
 }
