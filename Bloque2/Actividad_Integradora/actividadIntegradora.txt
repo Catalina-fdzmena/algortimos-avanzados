@@ -1,2 +1,29 @@
-En esta carpeta se colocarán todas las actividades integradoras que se vayan teniendo de acuerdo al 
-segundo bloque
+Instrucciones: 
+
+La empresa "Internet Máximo" ha empezado operaciones en la ciudad. Actualmente cuenta con poco capital inicial y personal, 
+así que requiere tomar decisiones inteligentes que le permitan entrar pronto en competencia con las empresas ya existentes. 
+
+
+Problema 1. Cobertura máxima 
+Los ingenieros de la empresa han generado un mapa que muestra cada una de las colonias de la ciudad
+ y las distancias máximas existente entre los centros geográficos de las mismas. Con el fin de poder
+empezar a competir, la empresa planea colocar fibra óptica para interconectar todas las colonias. 
+Sin embargo, el costo de instalación de esa infraestructura de conexión en todas las colonias entre 
+sí es muy elevado, por lo que la empresa necesita determinar la forma de conectar todas las colonias 
+utilizando los enlaces de fibra óptica cuya distancia total sea mínima (costo).
+
+---
+Problema 2. Ruta de entrega de documentos impresos 
+La empresa cuenta con poco personal y requiere que alguien visite cada colonia para ir a dejar estados 
+de cuenta físicos, publicidad, avisos y notificaciones impresos. Por esta razón la gerencia de la empresa
+ desea conocer ¿cuál es la ruta más corta posible que visita cada colonia exactamente una vez y al finalizar
+  el recorrido regresa a la colonia origen?
+
+---
+Problema 3. Máximo servicio que puede ofrecerse 
+Como se comentó antes, la empresa cuenta con pocos recursos disponibles, por lo que los equipos de telecomunicaciones
+instalados son muy heterogéneos. En consecuencia las capacidades máximas de ancho de banda (Mbps) en los diferentes
+enlaces de la red son muy diversas. La empresa desea determinar cuál es el máximo ancho de banda que se puede obtener
+entre dos colonias determinadas. Para ello ya se cuenta con un registro de las velocidades de transferencia máximas 
+entre cada una de las colonias instaladas.
+
