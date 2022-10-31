@@ -1,18 +1,5 @@
- /**
- * Ejemplo que implementa la lectura de los casos de prueba
- * para la Act Ingradora 2
- *
- * Compilacion para debug:
- *    g++ -std=c++17 -g -o main *.cpp
- * Ejecucion con valgrind:
- *    nix-env -iA nixpkgs.valgrind
- *    valgrind --leak-check=full ./main < TestCases/test01.txt
- *
- * Compilacion para ejecucion:
- *    g++ -std=c++17 -O3 -o main *.cpp
- * Ejecucion:
- *    ./main < TestCases/test01.txt
- **/
+/*
+*/
 
 #include <iostream>
 #include <sstream>
@@ -52,7 +39,6 @@ void readTestCase(std::istream &input, Graph &g1, Graph &g2) {
       continue; 
     }
     if (i > 1 && i <= numEdges1+1) {
-      std::cout << line << std::endl;
       aristas1.push_back(line);
       i++;
       continue;
@@ -77,19 +63,22 @@ void readTestCase(std::istream &input, Graph &g1, Graph &g2) {
   
 
 
-int main() {
-  std::cout << "Ejemplo de coloreo de grafos!" << std::endl;
-  std::stringstream inputInfo;
-  inputInfo << std::cin.rdbuf();
-  // Construye un grafo a partir de la consola usando
-  // representacion de Lista de adyacencia
+int main()
+{
   Graph grafo1;
   Graph grafo2;
+
+  std::stringstream inputInfo;
+  inputInfo << std::cin.rdbuf();
   readTestCase(inputInfo, grafo1, grafo2);
-  std::cout << "Grafo 1"<< std::endl;
-  grafo1.print();
-  //std::cout << "Grafo 2"<< std::endl;
-  //grafo2.print();
+
+  std::cout << "Problem 1" << std::endl << std::endl;
+
+  std::cout << "Problem 2" << std::endl;
   grafo1.BranchAndBoundTSP();
+  std::cout << std::endl;
+
+  std::cout << "Problem 3" << std::endl << std::endl;
+
   return 0;
 }

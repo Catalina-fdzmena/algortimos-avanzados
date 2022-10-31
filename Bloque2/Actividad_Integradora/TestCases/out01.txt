@@ -1,0 +1,14 @@
+Problem 1
+MST edges:
+(1, 2, 16)
+(2, 3, 18)
+(3, 4, 7)
+MST cost: 41
+
+Problem 2
+Path:
+1 2 3 4 1 
+Optimal cost: 73
+
+Problem 3
+Maximum flow from 1 to 4: 54

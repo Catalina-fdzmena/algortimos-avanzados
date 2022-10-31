@@ -1,4 +1,3 @@
-
 #include "Graph.h"
 
 Graph::Graph() {
@@ -151,7 +150,7 @@ void Graph::BranchAndBoundTSP() {
   tope.verticeAnterior = 0;
   tope.pathTSP.push_back(src);
   calculaCostoPosible(tope);
-  std::cout << "costo posible inicial: " << tope.costoPosible << std::endl;
+  
   std::priority_queue<NodeBB> pq;
   pq.push(tope);
   while (!pq.empty()) {
@@ -200,10 +199,11 @@ void Graph::BranchAndBoundTSP() {
       }
     }
   }
-  std::cout << "bestCostTSP: " << bestCostTSP << std::endl;
-  std::cout << "bestPathTSP: " << std::endl;
+  
+  std::cout << "Path: " << std::endl;
   for (int i = 0; i < (int)bestPathTSP.size(); i++) {
-    std::cout << bestPathTSP[i] << "-";
+    std::cout << bestPathTSP[i] << " ";
   }
-  std::cout << std::endl;
+
+  std::cout << std::endl << "Optimal cost: " << bestCostTSP << std::endl;
 }
