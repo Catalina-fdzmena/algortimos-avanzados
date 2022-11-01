@@ -1,0 +1,6 @@
+José Emilio Alvear Cantú (A01024944)
+    Me enfoqué en el problema 3. En este tuve que usar el algoritmo de Dinic
+    para solucionar el problema de flujo máximo, o en este caso, el máximo
+    servicio que se puede ofrecer. Usé referencias de video para entender el
+    algoritmo e implementarlo a través del pseudocódigo.
+

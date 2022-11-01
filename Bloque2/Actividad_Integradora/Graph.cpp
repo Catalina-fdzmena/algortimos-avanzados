@@ -212,7 +212,7 @@ void Graph::BranchAndBoundTSP() {
 
 
 // Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
-// Complejidad de espacio: O(V)
+// Complejidad de espacio: O(V^2)
 void Graph::MaximumFlow()
 {
   // Nodo de inicio no puede ser el mismo que nodo final
