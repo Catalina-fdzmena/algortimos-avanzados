@@ -211,6 +211,8 @@ void Graph::BranchAndBoundTSP() {
 }
 
 
+// Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
+// Complejidad de espacio: O(V)
 void Graph::MaximumFlow()
 {
   // Nodo de inicio no puede ser el mismo que nodo final
@@ -220,10 +222,14 @@ void Graph::MaximumFlow()
     std::vector<int> levels(numNodes + 1, -1);
     std::vector<std::vector<int>> residualGraph = adjMatrix;
 
+    // Mientras se pueda llegar al nodo final al hacer el grafo residual,
+    // se busca aumentar la cantidad de flujo que se puede mandar
     while (buildResidualGraph(levels, residualGraph))
     {
+      // Vector para contar cuantas veces se ha llegado a cada nodo
       std::vector<int> counts(numNodes + 1, 0);
 
+      // Mientras se regrese un flujo mayor a cero, se sigue aumentando
       while (int flow = sendFlow(residualGraph, levels, counts, start, INT_MAX))
       {
         maximumFlow += flow;
@@ -249,6 +255,7 @@ bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector
   std::queue<int> q;
   q.push(start);
 
+  // Se hace el BFS hasta marcar todos los nodos con un nivel
   while (!q.empty())
   {
     int node = q.front();
@@ -276,20 +283,25 @@ int Graph::sendFlow(std::vector<std::vector<int>> &residualGraph, std::vector<in
   if (counts[currentNode] == residualGraph[currentNode].size())
     return 0;
 
+  // Se revisan los nodos adyacentes del nodo actual
   for (int adjacentNode = 1; adjacentNode <= numNodes; adjacentNode++)
   {
+    // Solo se revisan aquellos que tengan peso
     if (residualGraph[currentNode][adjacentNode] > 0)
     {
       counts[currentNode]++;
+
+      // Solo se revisan nodos adyacentes que aumenten un nivel
       if (levels[adjacentNode] == levels[currentNode] + 1)
       {
         int currentFlow = std::min(flow, residualGraph[currentNode][adjacentNode]);
         
+        // Se encuentra el flujo minimo posible de cada nodo adyacente
         int minimumCapacity = sendFlow(residualGraph, levels, counts, adjacentNode, currentFlow);
         if (minimumCapacity > 0)
         {
-          residualGraph[currentNode][adjacentNode] -= minimumCapacity;
-          residualGraph[adjacentNode][currentNode] += minimumCapacity;
+          residualGraph[currentNode][adjacentNode] -= minimumCapacity; // Se suma el flujo al camino actual
+          residualGraph[adjacentNode][currentNode] += minimumCapacity; // Se resta el flujo del camino inverso
           return minimumCapacity;
         }
       }

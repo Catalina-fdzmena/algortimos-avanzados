@@ -1,4 +1,13 @@
 /*
+** Integrantes:
+**    José Emilio Alvear Cantú - A01024944
+**    Andrea Catalina Fernández Mena -
+**    Carlos Milano
+**
+** Referencias:
+**    Algoritmo de Maximum Flow obtenido de: https://www.youtube.com/watch?v=duKIzgJQ1w8
+**    
+**
 */
 
 #include <iostream>
