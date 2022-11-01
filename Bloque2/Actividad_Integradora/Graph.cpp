@@ -1,4 +1,7 @@
 #include "Graph.h"
+#include <queue>
+#include <algorithm>
+#include <climits>
 
 Graph::Graph() {
   numNodes = 0;
@@ -150,7 +153,7 @@ void Graph::BranchAndBoundTSP() {
   tope.verticeAnterior = 0;
   tope.pathTSP.push_back(src);
   calculaCostoPosible(tope);
-  
+
   std::priority_queue<NodeBB> pq;
   pq.push(tope);
   while (!pq.empty()) {
@@ -204,6 +207,94 @@ void Graph::BranchAndBoundTSP() {
   for (int i = 0; i < (int)bestPathTSP.size(); i++) {
     std::cout << bestPathTSP[i] << " ";
   }
-
   std::cout << std::endl << "Optimal cost: " << bestCostTSP << std::endl;
+}
+
+
+void Graph::MaximumFlow()
+{
+  // Nodo de inicio no puede ser el mismo que nodo final
+  if (start != end)
+  {
+    int maximumFlow = 0;
+    std::vector<int> levels(numNodes + 1, -1);
+    std::vector<std::vector<int>> residualGraph = adjMatrix;
+
+    while (buildResidualGraph(levels, residualGraph))
+    {
+      std::vector<int> counts(numNodes + 1, 0);
+
+      while (int flow = sendFlow(residualGraph, levels, counts, start, INT_MAX))
+      {
+        maximumFlow += flow;
+      }
+    }
+
+    std::cout << "Maximum flow from " << start << " to " << end << ": " << maximumFlow;
+  }
+}
+
+// Se hace un BFS para crear el grafo residual con niveles
+bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int>> &residualGraph)
+{
+  // Inicializar los niveles a -1, señalando que no han sido visitados
+  for (int i = 1; i <= numNodes; i++)
+  {
+    levels[i] = -1;
+  }
+
+  // El vertice inicial tiene nivel 0
+  levels[start] = 0;
+
+  std::queue<int> q;
+  q.push(start);
+
+  while (!q.empty())
+  {
+    int node = q.front();
+    q.pop();
+    for (int adjacentNode = 1; adjacentNode <= numNodes; adjacentNode++)
+    {
+      if (node != adjacentNode && residualGraph[node][adjacentNode] > 0 && levels[adjacentNode] < 0)
+      {
+        levels[adjacentNode] = levels[node] + 1;
+        q.push(adjacentNode);
+      }
+    }
+  }
+
+  // Si no se puede llegar al nodo final, se dejan de crear grafos y se regresa flujo maximo
+  return levels[end] < 0 ? false : true ;
+}
+
+
+int Graph::sendFlow(std::vector<std::vector<int>> &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow)
+{
+  if (currentNode == end)
+    return flow;
+
+  if (counts[currentNode] == residualGraph[currentNode].size())
+    return 0;
+
+  for (int adjacentNode = 1; adjacentNode <= numNodes; adjacentNode++)
+  {
+    if (residualGraph[currentNode][adjacentNode] > 0)
+    {
+      counts[currentNode]++;
+      if (levels[adjacentNode] == levels[currentNode] + 1)
+      {
+        int currentFlow = std::min(flow, residualGraph[currentNode][adjacentNode]);
+        
+        int minimumCapacity = sendFlow(residualGraph, levels, counts, adjacentNode, currentFlow);
+        if (minimumCapacity > 0)
+        {
+          residualGraph[currentNode][adjacentNode] -= minimumCapacity;
+          residualGraph[adjacentNode][currentNode] += minimumCapacity;
+          return minimumCapacity;
+        }
+      }
+    }
+  }
+
+  return 0;
 }

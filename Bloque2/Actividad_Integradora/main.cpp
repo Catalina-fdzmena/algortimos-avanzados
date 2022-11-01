@@ -78,7 +78,8 @@ int main()
   grafo1.BranchAndBoundTSP();
   std::cout << std::endl;
 
-  std::cout << "Problem 3" << std::endl << std::endl;
+  std::cout << "Problem 3" << std::endl;
+  grafo2.MaximumFlow();
 
   return 0;
 }

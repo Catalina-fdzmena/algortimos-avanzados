@@ -28,6 +28,10 @@ private:
     
   void split(std::string line, std::vector<int> &res);
   void calculaCostoPosible(NodeBB &nodoActual);
+
+  // Funciones para MaximumFlow
+  bool buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int>> &residualGraph);
+  int sendFlow(std::vector<std::vector<int>> &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow);
   
 public:
   Graph();
@@ -36,7 +40,7 @@ public:
   void initDirectedGraph(int n, int m, int s, int e, std::vector<std::string> aristas);
   void print();
   void BranchAndBoundTSP();
-
+  void MaximumFlow();
 };
 
 
