@@ -81,9 +81,9 @@ int main()
   inputInfo << std::cin.rdbuf();
   readTestCase(inputInfo, grafo1, grafo2);
 
-  std::cout << "Problem 1" << std::endl << std::endl;
+  std::cout << "Problem 1" << std::endl;
   grafo1.Prim();  //Problema de Prim's Algorithm
- std::cout << std::endl;
+  std::cout << std::endl;
 
   std::cout << "Problem 2" << std::endl;
   grafo1.BranchAndBoundTSP(); //Problema de Branch and Bound
