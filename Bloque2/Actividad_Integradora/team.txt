@@ -1,15 +1,25 @@
+Aportaciones por integrante del equipo
+
+---------------------------------------------
+
 José Emilio Alvear Cantú (A01024944)
     Me enfoqué en el problema 3. En este tuve que usar el algoritmo de Dinic
     para solucionar el problema de flujo máximo, o en este caso, el máximo
     servicio que se puede ofrecer. Usé referencias de video para entender el
     algoritmo e implementarlo a través del pseudocódigo.
 
+---------------------------------------------
+
 Andrea Catalina Fernández Mena (A01197705)
-    Me encargué de documentar el problema 2. Basado con el código fuente hecho en clase 
-    con el profesor utilizando el algoritmo de branch and bound visto en clase.
-    Por otra parte me enfoqué en el problema 1 (versión inicial) para el algortimo de Prim 
+    **Como principal, me enfoqué en la implementación del problema 1. Utilizando el algoritmo de Prim
     implementando la lógica vista durante la clase, el pseudocódigo y un video de apoyo que fue
     referenciado en el documento del main.
+
+    **También fui responsable de documentar el problema 2, mientras el profesor nos apoyaba con parte de
+    la implementación durante clase tomando como base ese código que utiliza
+     el algoritmo de branch and bound visto en clase.
+    
+---------------------------------------------
 
 Carlos David Milano Duarte (A01383102)
     Mi aportación a esta actividad integradora fue ayudar con el problema número 2, el cual 
