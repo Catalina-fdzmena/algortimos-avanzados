@@ -6,8 +6,8 @@
 **
 ** Referencias:
 **    Algoritmo de Maximum Flow obtenido de: https://www.youtube.com/watch?v=duKIzgJQ1w8
+**    Algoritmo de Prim obtenido de: https://youtu.be/4ZlRH0eK-qQ 
 **    
-**
 */
 
 #include <iostream>
