@@ -82,13 +82,15 @@ int main()
   readTestCase(inputInfo, grafo1, grafo2);
 
   std::cout << "Problem 1" << std::endl << std::endl;
+  grafo1.Prim();  //Problema de Prim's Algorithm
+ std::cout << std::endl;
 
   std::cout << "Problem 2" << std::endl;
-  grafo1.BranchAndBoundTSP();
+  grafo1.BranchAndBoundTSP(); //Problema de Branch and Bound
   std::cout << std::endl;
 
   std::cout << "Problem 3" << std::endl;
-  grafo2.MaximumFlow();
+  grafo2.MaximumFlow(); //Problema de Dinics Flow 
 
   return 0;
 }

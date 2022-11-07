@@ -37,7 +37,7 @@ void Graph::initUndirectedGraph(int n, int m, int s, int e,
   directedGraph = false;
   // Reservar memoria la lista de adyacencia (renglon 0 no utilizado)
   adjList.resize(numNodes + 1);
-  // Reservar memoria para la matriz de adyacencia (renglon 0 no utilizado)
+  // Reservar memoria pares a la matriz de adyacencia (renglon 0 no utilizado)
   adjMatrix.resize(numNodes + 1);
   // Declara una lista vacia para cada renglon de la lista de adyacencia
   for (int k = 0; k <= numNodes; k++) {
@@ -70,9 +70,9 @@ void Graph::initDirectedGraph(int n, int m, int s, int e,
   directedGraph = true;
   // Reservar memoria la lista de adyacencia (renglon 0 no utilizado)
   adjList.resize(numNodes + 1);
-  // Reservar memoria para la matriz de adyacencia (renglon 0 no utilizado)
+  // Reservar memoria pairedElementsa la matriz de adyacencia (renglon 0 no utilizado)
   adjMatrix.resize(numNodes + 1);
-  // Declara una lista vacia para cada renglon de la lista de adyacencia
+  // Declara una lista vacia pairedElementsa cada renglon de la lista de adyacencia
   for (int k = 0; k <= numNodes; k++) {
     std::list<std::pair<int, int>> tmpList; // Lista de pares (vertices, peso)
     std::vector<int> tmpVector(numNodes + 1, 0);
@@ -101,8 +101,8 @@ void Graph::print() {
     std::list<std::pair<int, int>> g = adjList[u];
     std::list<std::pair<int, int>>::iterator it;
     for (it = g.begin(); it != g.end(); ++it) {
-      std::pair<int, int> par = *it;
-      std::cout << "{" << par.first << "," << par.second << "} ";
+      std::pair<int, int> pairedElements = *it;
+      std::cout << "{" << pairedElements.first << "," << pairedElements.second << "} ";
     }
     std::cout << std::endl;
   }
@@ -143,6 +143,92 @@ void Graph::calculaCostoPosible(NodeBB &nodoActual) {
   }
 }
 
+//-----------------------Problema 1 : Prims's algorithm --------------------------------
+
+//Complejidad de tiempo: O(( V + E) log V ) donde E son las aristas y V los vertices
+//Complejidad de espacio: O(E+V)
+
+bool visitasIncompletas( std::vector<bool> visitados){
+  for(int i = 1; i < visitados.size(); i++){
+    if(!visitados[i]){
+      return true;
+    }
+  }
+  return false;
+}
+
+//Movilizarse al siguiente espacio. 
+bool nextHop(std::priority_queue < std::pair < int, std::pair < int,int > > >vPending,std::vector<bool> visitados){
+
+  //Pendiente función para movilizarse de un nodo a otro de los disponibles. 
+  //Carlos Porfa haz esta parte :D
+  return false;
+}
+
+void Graph::Prim(){
+  std::vector<bool> visitados (numNodes+1, false); //Marcar puntos visitados de las direcciones
+  std::vector < std::list < std::pair < int, std::pair < int,int > > > > relatedConnection; //Identificar las conexiones
+  relatedConnection.resize(numNodes + 1); //Reservar memoria para las conexiones
+
+  std::priority_queue < std::pair < int, std::pair < int,int > > > vPending;  //Vertices pendientes de ser checados
+  
+  int currentIndex = 1;
+  visitados[currentIndex] = true;
+  
+  //Mientras haya nodos sin ser marcados se realiza proceso de iteración sobre los pares
+  while(visitasIncompletas(visitados)){
+
+    //Lista de adyacencias sobre 
+    std::list<std::pair<int, int > > g = adjList[currentIndex];
+
+    //Vector de iteración para marcar a los notos visitados 
+    std::list<std::pair<int, int > >::iterator it;
+
+      for (it = g.begin(); it != g.end(); ++it) {
+        std::pair<int, int > pairedElements = *it;
+        vPending.push(std::make_pair(-1*pairedElements.second, std::make_pair (currentIndex, pairedElements.first)));        
+      }    
+    
+    //Definir una variable int para mobilizarse al siguiente indice 
+    int nextIndex = nextHop(vPending, visitados);
+    std::pair<int, std::pair < int,int > > top = vPending.top();
+
+    //La coneción del indice actual haciendo un queue
+    relatedConnection[currentIndex].push_back({top.first, {top.second.first,top.second.second}});
+    //Se añade del indice pasado al actual.
+    currentIndex = nextIndex;
+    visitados[currentIndex] = true;
+    
+  }
+
+//Contador para pares encontrados 
+  int sum = 0;
+
+//Hacer un print de los edges  
+  std::cout << "\nMST edges:" << std::endl;
+
+//Con un ciclo for se realiza una relación respecto al número de nodos y el posicionamiento de cada uno de sus pares de conexiones  
+  for (int u = 1; u <= numNodes; u++) {
+    std::list<std::pair<int, std::pair < int,int >>> g = relatedConnection[u]; //Numero de nodos menos  respecto a sus conexiones
+    std::list<std::pair<int, std::pair < int,int >>>::iterator it; //Vector de iteracion para recorrer el nodo
+    //Ciclo de iteración para los elementos en pares.
+    for (it = g.begin(); it != g.end(); ++it) {
+      std::pair<int, std::pair < int,int >> pairedElements = *it;
+      std::cout << "(" <<pairedElements.second.first<< ", "<< pairedElements.second.second << ", " << -1*pairedElements.first << ") "<< std::endl;
+      sum += -1*pairedElements.first;
+    }
+  }  std::cout<<"MST cost: "<< sum << std::endl<<std::endl;
+
+ 
+}
+
+
+
+//------------pairedElementste 2 : Algoritmo Branch and Bound ------------------------------------------
+
+
+// Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
+// Complejidad de espacio: O(V^2)
 void Graph::BranchAndBoundTSP() {
   int bestCostTSP = INF;
   std::vector<int> bestPathTSP;
@@ -210,6 +296,7 @@ void Graph::BranchAndBoundTSP() {
   std::cout << std::endl << "Optimal cost: " << bestCostTSP << std::endl;
 }
 
+//----------------pairedElementste 3 : Algoritmo Dinic --------------------------------
 
 // Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
 // Complejidad de espacio: O(V^2)
@@ -226,7 +313,7 @@ void Graph::MaximumFlow()
     // se busca aumentar la cantidad de flujo que se puede mandar
     while (buildResidualGraph(levels, residualGraph))
     {
-      // Vector para contar cuantas veces se ha llegado a cada nodo
+      // Vector pairedElementsa contar cuantas veces se ha llegado a cada nodo
       std::vector<int> counts(numNodes + 1, 0);
 
       // Mientras se regrese un flujo mayor a cero, se sigue aumentando
@@ -240,7 +327,7 @@ void Graph::MaximumFlow()
   }
 }
 
-// Se hace un BFS para crear el grafo residual con niveles
+// Se hace un BFS pairedElementsa crear el grafo residual con niveles
 bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int>> &residualGraph)
 {
   // Inicializar los niveles a -1, señalando que no han sido visitados
