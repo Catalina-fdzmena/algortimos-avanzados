@@ -1,7 +1,7 @@
 /*
 ** Integrantes:
 **    José Emilio Alvear Cantú - A01024944
-**    Andrea Catalina Fernández Mena -
+**    Andrea Catalina Fernández Mena - A01197705
 **    Carlos Milano - A01383102
 **
 ** Referencias:
