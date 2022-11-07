@@ -11,3 +11,8 @@ Andrea Catalina Fernández Mena (A01197705)
     implementando la lógica vista durante la clase, el pseudocódigo y un video de apoyo que fue
     referenciado en el documento del main.
 
+Carlos David Milano Duarte (A01383102)
+    Mi aportación a esta actividad integradora fue ayudar con el problema número 2, el cual 
+    solo fue adaptarlo a nuestro codigo ya que teniamos una base del mismo, tambien obtuve 
+    las complejidades de los problemas con lo visto en clase e investigando por aparte para
+    llegar a un resultado correcto.

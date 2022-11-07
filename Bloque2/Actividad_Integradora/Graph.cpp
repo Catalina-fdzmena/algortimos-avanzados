@@ -146,7 +146,7 @@ void Graph::calculaCostoPosible(NodeBB &nodoActual) {
 //-----------------------Problema 1 : Prims's algorithm --------------------------------
 
 //Complejidad de tiempo: O(( V + E) log V ) donde E son las aristas y V los vertices
-//Complejidad de espacio: O(E+V)
+//Complejidad de espacio: O(E+V) 
 
 //Movilizarse al siguiente espacio. 
 int nextHop(std::priority_queue < std::pair < int, std::pair < int,int > > >vPending,std::vector<bool> visitados){
@@ -246,7 +246,7 @@ void Graph::Prim(){
 //------------Problema 2 : Algoritmo Branch and Bound ------------------------------------------
 
 // Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
-// Complejidad de espacio: O(V^2)
+// Complejidad de espacio: O(V^2) 
 
 void Graph::BranchAndBoundTSP() {
   int bestCostTSP = INF;
@@ -318,7 +318,7 @@ void Graph::BranchAndBoundTSP() {
 //----------------Problema 3 : Algoritmo Dinic --------------------------------
 
 // Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
-// Complejidad de espacio: O(V^2)
+// Complejidad de espacio: O(V^2) 
 void Graph::MaximumFlow()
 {
   // Nodo de inicio no puede ser el mismo que nodo final
