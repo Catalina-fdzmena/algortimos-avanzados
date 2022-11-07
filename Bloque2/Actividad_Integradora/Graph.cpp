@@ -183,7 +183,7 @@ bool visitasIncompletas( std::vector<bool> visitados){
   return false;
 }
 
-
+//Implementación de algoritmo de Prim
 void Graph::Prim(){
   std::vector<bool> visitados (numNodes+1, false); //Marcar puntos visitados de las direcciones
   std::vector < std::list < std::pair < int, std::pair < int,int > > > > relatedConnection; //Identificar las conexiones
