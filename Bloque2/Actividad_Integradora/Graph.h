@@ -39,8 +39,9 @@ public:
   void initUndirectedGraph(int n, int m, int s, int e, std::vector<std::string> aristas);
   void initDirectedGraph(int n, int m, int s, int e, std::vector<std::string> aristas);
   void print();
-  void BranchAndBoundTSP();
-  void MaximumFlow();
+  void Prim();  //Resolución para problema 1
+  void BranchAndBoundTSP(); //Resolución para problema 2
+  void MaximumFlow(); //Resolución para problema 3
 };
 
 
