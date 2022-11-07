@@ -224,7 +224,7 @@ void Graph::Prim(){
   int sum = 0;
 
 //Hacer un print de los edges  
-  std::cout << "\nMST edges:" << std::endl;
+  std::cout << "MST edges:" << std::endl;
 
 //Con un ciclo for se realiza una relación respecto al número de nodos y el posicionamiento de cada uno de sus pares de conexiones  
   for (int u = 1; u <= numNodes; u++) {
