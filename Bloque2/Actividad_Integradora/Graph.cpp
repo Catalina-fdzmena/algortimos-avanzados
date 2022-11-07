@@ -313,7 +313,7 @@ void Graph::MaximumFlow()
     // se busca aumentar la cantidad de flujo que se puede mandar
     while (buildResidualGraph(levels, residualGraph))
     {
-      // Vector pairedElementsa contar cuantas veces se ha llegado a cada nodo
+      // Vector para contar cuantas veces se ha llegado a cada nodo
       std::vector<int> counts(numNodes + 1, 0);
 
       // Mientras se regrese un flujo mayor a cero, se sigue aumentando
