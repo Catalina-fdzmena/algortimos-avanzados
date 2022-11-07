@@ -18,6 +18,7 @@ int knapSack(int W, int w[], int v[], int n) {
    }
    return K[n][W];
 }
+
 int main() {
    cout << "Ingrese la cantidad de valores para el problema:";
    int n, W;
