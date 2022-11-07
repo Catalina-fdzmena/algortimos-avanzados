@@ -148,8 +148,34 @@ void Graph::calculaCostoPosible(NodeBB &nodoActual) {
 //Complejidad de tiempo: O(( V + E) log V ) donde E son las aristas y V los vertices
 //Complejidad de espacio: O(E+V)
 
+//Movilizarse al siguiente espacio. 
+int nextHop(std::priority_queue < std::pair < int, std::pair < int,int > > >vPending,std::vector<bool> visitados){
+
+//Vector donde se encuentran todos los nodos antes de ser marcados como visitados vPending
+
+//Ciclo mientras vPending continué teniendo elementos dentro 
+  while(!vPending.empty()){
+    std::pair<int, std::pair < int,int > >  top = vPending.top();
+
+    //Si se identifica que un valor se añade en la queue de visitados
+    if(visitados[top.second.second]){
+      vPending.pop();  //El mismo valor se saca del vector de lista vpendieng
+    }else{
+      //En caso de no encontrase se revisa regresando los valores de las coordenadas que está clasificadas como visitadas
+      visitados[top.second.second] = true; 
+      return top.second.second;
+    }
+  }
+  return 0;
+}
+
+//Espacios del nodo que faltan de ser marcados
 bool visitasIncompletas( std::vector<bool> visitados){
+
+  //Ciclo reevalua el tamaño del vector visitados
   for(int i = 1; i < visitados.size(); i++){
+
+    //Si es diferente al tamaña máximo continua evaluando la iteraciones
     if(!visitados[i]){
       return true;
     }
@@ -157,13 +183,6 @@ bool visitasIncompletas( std::vector<bool> visitados){
   return false;
 }
 
-//Movilizarse al siguiente espacio. 
-bool nextHop(std::priority_queue < std::pair < int, std::pair < int,int > > >vPending,std::vector<bool> visitados){
-
-  //Pendiente función para movilizarse de un nodo a otro de los disponibles. 
-  //Carlos Porfa haz esta parte :D
-  return false;
-}
 
 void Graph::Prim(){
   std::vector<bool> visitados (numNodes+1, false); //Marcar puntos visitados de las direcciones
