@@ -243,11 +243,11 @@ void Graph::Prim(){
 
 
 
-//------------pairedElementste 2 : Algoritmo Branch and Bound ------------------------------------------
-
+//------------Problema 2 : Algoritmo Branch and Bound ------------------------------------------
 
 // Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
 // Complejidad de espacio: O(V^2)
+
 void Graph::BranchAndBoundTSP() {
   int bestCostTSP = INF;
   std::vector<int> bestPathTSP;
@@ -315,7 +315,7 @@ void Graph::BranchAndBoundTSP() {
   std::cout << std::endl << "Optimal cost: " << bestCostTSP << std::endl;
 }
 
-//----------------pairedElementste 3 : Algoritmo Dinic --------------------------------
+//----------------Problema 3 : Algoritmo Dinic --------------------------------
 
 // Complejidad de tiempo: O(EV^2) donde E son las aristas y V los vertices
 // Complejidad de espacio: O(V^2)
