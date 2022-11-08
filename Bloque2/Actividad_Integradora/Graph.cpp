@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <climits>
 
-
 Graph::Graph() {
   numNodes = 0;
   numEdges = 0;
@@ -42,7 +41,7 @@ void Graph::initUndirectedGraph(int n, int m, int s, int e,
   adjMatrix.resize(numNodes + 1);
   // Declara una lista vacia para cada renglon de la lista de adyacencia
   for (int k = 0; k <= numNodes; k++) {
-    std::list<std::pair<int, int> > tmpList; // Lista de pares (vertices, peso)
+    std::list<std::pair<int, int>> tmpList; // Lista de pares (vertices, peso)
     std::vector<int> tmpVector(numNodes + 1, INF);
     adjList[k] = tmpList;
     adjMatrix[k] = tmpVector;
@@ -75,7 +74,7 @@ void Graph::initDirectedGraph(int n, int m, int s, int e,
   adjMatrix.resize(numNodes + 1);
   // Declara una lista vacia pairedElementsa cada renglon de la lista de adyacencia
   for (int k = 0; k <= numNodes; k++) {
-    std::list<std::pair<int, int> > tmpList; // Lista de pares (vertices, peso)
+    std::list<std::pair<int, int>> tmpList; // Lista de pares (vertices, peso)
     std::vector<int> tmpVector(numNodes + 1, 0);
     adjList[k] = tmpList;
     adjMatrix[k] = tmpVector;
@@ -99,8 +98,8 @@ void Graph::print() {
   std::cout << "Adjacency List" << std::endl;
   for (int u = 1; u <= numNodes; u++) {
     std::cout << "vertex " << u << ":";
-    std::list<std::pair<int, int> > g = adjList[u];
-    std::list<std::pair<int, int> >::iterator it;
+    std::list<std::pair<int, int>> g = adjList[u];
+    std::list<std::pair<int, int>>::iterator it;
     for (it = g.begin(); it != g.end(); ++it) {
       std::pair<int, int> pairedElements = *it;
       std::cout << "{" << pairedElements.first << "," << pairedElements.second << "} ";
@@ -186,60 +185,54 @@ bool missedVisits( std::vector<bool> visitados){
 
 //Implementación de algoritmo de Prim
 void Graph::Prim(){
-  std::vector<bool> visitados (numNodes+1, false); //Marcar puntos visitados de las direcciones
-  std::vector < std::list < std::pair < int, std::pair < int,int > > > > relatedConnection; //Identificar las conexiones
-  relatedConnection.resize(numNodes + 1); //Reservar memoria para las conexiones
-
-  std::priority_queue < std::pair < int, std::pair < int,int > > > vPending;  //Vertices pendientes de ser checados
-  
-  int currentIndex = 1;
-  visitados[currentIndex] = true;
-  
+  //Marcar puntos visitados de las direcciones
+  //Identificar las conexiones
+  std::vector<bool> visitados(numNodes + 1, false); //Vector  para marcar a los nodos visitados
+  std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>,std::greater<>> relatedConnection;
+  std::vector<std::pair<std::pair<int, int>, int>> pairedElements;
+  int sum = 0; //Contador para pares encontrados
+  int nodesLeft = numNodes;
   //Mientras haya nodos sin ser marcados se realiza proceso de iteración sobre los pares
-  while(missedVisits(visitados)){
+  auto startIndex =
+    std::pair<int, std::pair<int, int>>(0, std::pair<int, int>(-1, 1));
+    relatedConnection.push(startIndex); //La coneción del indice actual haciendo un queue
+    while (nodesLeft != 0 && !relatedConnection.empty()) {
+      std::pair<int, std::pair<int, int>> currentIndex = relatedConnection.top();
+      relatedConnection.pop();
 
-    //Lista de adyacencias sobre 
-    std::list<std::pair<int, int > > g = adjList[currentIndex];
+      if (visitados[currentIndex.second.second]){
+        continue;
+      }
+      sum += currentIndex.first;
 
-    //Vector de iteración para marcar a los notos visitados 
-    std::list<std::pair<int, int > >::iterator it;
+      if (currentIndex.second.first != -1) {
+        pairedElements.push_back(std::pair<std::pair<int, int>, int>(std::pair<int, int>(currentIndex.second.first, currentIndex.second.second),currentIndex.first));
+      }
+      visitados[currentIndex.second.second] = true;
 
-      for (it = g.begin(); it != g.end(); ++it) {
-        std::pair<int, int > pairedElements = *it;
-        vPending.push(std::make_pair(-1*pairedElements.second, std::make_pair (currentIndex, pairedElements.first)));        
-      }    
-    
-    //Definir una variable int para mobilizarse al siguiente indice 
-    int nextIndex = nextHop(vPending, visitados);
-    std::pair<int, std::pair < int,int > > top = vPending.top();
-
-    //La coneción del indice actual haciendo un queue
-    relatedConnection[currentIndex].push_back({top.first, {top.second.first,top.second.second}});
-    //Se añade del indice pasado al actual.
-    currentIndex = nextIndex;
-    visitados[currentIndex] = true;
-    
-  }
-
-//Contador para pares encontrados 
-  int sum = 0;
-
-//Hacer un print de los edges  
-  std::cout << "MST edges:" << std::endl;
-
-//Con un ciclo for se realiza una relación respecto al número de nodos y el posicionamiento de cada uno de sus pares de conexiones  
-  for (int u = 1; u <= numNodes; u++) {
-    std::list<std::pair<int, std::pair < int,int > > > g = relatedConnection[u]; //Numero de nodos menos  respecto a sus conexiones
-    std::list<std::pair<int, std::pair < int,int > > >::iterator it; //Vector de iteracion para recorrer el nodo
-    //Ciclo de iteración para los elementos en pares.
-    for (it = g.begin(); it != g.end(); ++it) {
-      std::pair<int, std::pair < int,int > > pairedElements = *it;
-      std::cout << "(" <<pairedElements.second.first<< ", "<< pairedElements.second.second << ", " << -1*pairedElements.first << ") "<< std::endl;
-      sum += -1*pairedElements.first;
+      if ((nodesLeft - 1) == 0){
+        break;
+      }
+      //Con un ciclo for se realiza una relación respecto al número de nodos y el posicionamiento de cada uno de sus pares de conexiones
+      for (const std::pair<int, int> &pairedElements : adjList[currentIndex.second.second]) {
+        if (visitados[pairedElements.first]){
+          continue;
+        }
+        //Definir una variable int para mobilizarse al siguiente indice
+        auto nextIndex = 
+         std::pair<int, std::pair<int, int>>(pairedElements.second,
+         std::pair<int, int>(currentIndex.second.second, pairedElements.first)); //Se añade del indice pasado al actual.
+        relatedConnection.push(nextIndex);
+      }
     }
-  }  std::cout<<"MST cost: "<< sum << std::endl<<std::endl;
+    //Hacer un print de los edges
+    std::cout << "MST edges:" << std::endl;
+    for (const std::pair<std::pair<int, int>, int> &pairedElements : pairedElements) {
+      std::cout << "(" << pairedElements.first.first << ", " << pairedElements.first.second << ", "
+      << pairedElements.second << ")" << std::endl;
+    }
+    std::cout << "MST cost: " << sum << std::endl;
 
- 
 }
 
 
@@ -327,7 +320,7 @@ void Graph::MaximumFlow()
   {
     int maximumFlow = 0;
     std::vector<int> levels(numNodes + 1, -1);
-    std::vector<std::vector<int> > residualGraph = adjMatrix;
+    std::vector<std::vector<int>> residualGraph = adjMatrix;
 
     // Mientras se pueda llegar al nodo final al hacer el grafo residual,
     // se busca aumentar la cantidad de flujo que se puede mandar
@@ -348,7 +341,7 @@ void Graph::MaximumFlow()
 }
 
 // Se hace un BFS pairedElementsa crear el grafo residual con niveles
-bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int> > &residualGraph)
+bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int>> &residualGraph)
 {
   // Inicializar los niveles a -1, señalando que no han sido visitados
   for (int i = 1; i <= numNodes; i++)
@@ -382,7 +375,7 @@ bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector
 }
 
 
-int Graph::sendFlow(std::vector<std::vector<int> > &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow)
+int Graph::sendFlow(std::vector<std::vector<int>> &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow)
 {
   if (currentNode == end)
     return flow;
