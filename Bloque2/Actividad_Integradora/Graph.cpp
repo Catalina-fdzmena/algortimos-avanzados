@@ -145,7 +145,7 @@ void Graph::calculaCostoPosible(NodeBB &nodoActual) {
 
 //-----------------------Problema 1 : Prims's algorithm --------------------------------
 
-//Complejidad de tiempo: O(( V + E) log V ) donde E son las aristas y V los vertices
+//Complejidad de tiempo: O(( V + E) log V ) = O(ElogV) donde E son las aristas y V los vertices
 //Complejidad de espacio: O(E+V) 
 
 //Movilizarse al siguiente espacio. 
@@ -170,7 +170,7 @@ int nextHop(std::priority_queue < std::pair < int, std::pair < int,int > > >vPen
 }
 
 //Espacios del nodo que faltan de ser marcados
-bool visitasIncompletas( std::vector<bool> visitados){
+bool missedVisits( std::vector<bool> visitados){
 
   //Ciclo reevalua el tamaño del vector visitados
   for(int i = 1; i < visitados.size(); i++){
@@ -195,7 +195,7 @@ void Graph::Prim(){
   visitados[currentIndex] = true;
   
   //Mientras haya nodos sin ser marcados se realiza proceso de iteración sobre los pares
-  while(visitasIncompletas(visitados)){
+  while(missedVisits(visitados)){
 
     //Lista de adyacencias sobre 
     std::list<std::pair<int, int > > g = adjList[currentIndex];
