@@ -7,6 +7,15 @@
 ** Referencias:
 **    Algoritmo de Maximum Flow obtenido de: https://www.youtube.com/watch?v=duKIzgJQ1w8
 **    Algoritmo de Prim obtenido de: https://youtu.be/4ZlRH0eK-qQ 
+**    Algoritmo de Branch and Bound obtenido de sesión de clase y archivo repplit: https://replit.com/join/lozttccvwm-ertello 
+**
+**
+----Instrucciones ----
+**
+** Compilacion para ejecucion:
+**    g++ -o main.exe graph.cpp NodeBB.cpp main.cpp
+** Ejecucion:
+**    main.exe < TestCases\test01.txt     
 **    
 */
 
