@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <climits>
 
+
 Graph::Graph() {
   numNodes = 0;
   numEdges = 0;
@@ -41,7 +42,7 @@ void Graph::initUndirectedGraph(int n, int m, int s, int e,
   adjMatrix.resize(numNodes + 1);
   // Declara una lista vacia para cada renglon de la lista de adyacencia
   for (int k = 0; k <= numNodes; k++) {
-    std::list<std::pair<int, int>> tmpList; // Lista de pares (vertices, peso)
+    std::list<std::pair<int, int> > tmpList; // Lista de pares (vertices, peso)
     std::vector<int> tmpVector(numNodes + 1, INF);
     adjList[k] = tmpList;
     adjMatrix[k] = tmpVector;
@@ -74,7 +75,7 @@ void Graph::initDirectedGraph(int n, int m, int s, int e,
   adjMatrix.resize(numNodes + 1);
   // Declara una lista vacia pairedElementsa cada renglon de la lista de adyacencia
   for (int k = 0; k <= numNodes; k++) {
-    std::list<std::pair<int, int>> tmpList; // Lista de pares (vertices, peso)
+    std::list<std::pair<int, int> > tmpList; // Lista de pares (vertices, peso)
     std::vector<int> tmpVector(numNodes + 1, 0);
     adjList[k] = tmpList;
     adjMatrix[k] = tmpVector;
@@ -98,8 +99,8 @@ void Graph::print() {
   std::cout << "Adjacency List" << std::endl;
   for (int u = 1; u <= numNodes; u++) {
     std::cout << "vertex " << u << ":";
-    std::list<std::pair<int, int>> g = adjList[u];
-    std::list<std::pair<int, int>>::iterator it;
+    std::list<std::pair<int, int> > g = adjList[u];
+    std::list<std::pair<int, int> >::iterator it;
     for (it = g.begin(); it != g.end(); ++it) {
       std::pair<int, int> pairedElements = *it;
       std::cout << "{" << pairedElements.first << "," << pairedElements.second << "} ";
@@ -228,11 +229,11 @@ void Graph::Prim(){
 
 //Con un ciclo for se realiza una relación respecto al número de nodos y el posicionamiento de cada uno de sus pares de conexiones  
   for (int u = 1; u <= numNodes; u++) {
-    std::list<std::pair<int, std::pair < int,int >>> g = relatedConnection[u]; //Numero de nodos menos  respecto a sus conexiones
-    std::list<std::pair<int, std::pair < int,int >>>::iterator it; //Vector de iteracion para recorrer el nodo
+    std::list<std::pair<int, std::pair < int,int > > > g = relatedConnection[u]; //Numero de nodos menos  respecto a sus conexiones
+    std::list<std::pair<int, std::pair < int,int > > >::iterator it; //Vector de iteracion para recorrer el nodo
     //Ciclo de iteración para los elementos en pares.
     for (it = g.begin(); it != g.end(); ++it) {
-      std::pair<int, std::pair < int,int >> pairedElements = *it;
+      std::pair<int, std::pair < int,int > > pairedElements = *it;
       std::cout << "(" <<pairedElements.second.first<< ", "<< pairedElements.second.second << ", " << -1*pairedElements.first << ") "<< std::endl;
       sum += -1*pairedElements.first;
     }
@@ -326,7 +327,7 @@ void Graph::MaximumFlow()
   {
     int maximumFlow = 0;
     std::vector<int> levels(numNodes + 1, -1);
-    std::vector<std::vector<int>> residualGraph = adjMatrix;
+    std::vector<std::vector<int> > residualGraph = adjMatrix;
 
     // Mientras se pueda llegar al nodo final al hacer el grafo residual,
     // se busca aumentar la cantidad de flujo que se puede mandar
@@ -347,7 +348,7 @@ void Graph::MaximumFlow()
 }
 
 // Se hace un BFS pairedElementsa crear el grafo residual con niveles
-bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int>> &residualGraph)
+bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int> > &residualGraph)
 {
   // Inicializar los niveles a -1, señalando que no han sido visitados
   for (int i = 1; i <= numNodes; i++)
@@ -381,7 +382,7 @@ bool Graph::buildResidualGraph(std::vector<int> &levels, std::vector<std::vector
 }
 
 
-int Graph::sendFlow(std::vector<std::vector<int>> &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow)
+int Graph::sendFlow(std::vector<std::vector<int> > &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow)
 {
   if (currentNode == end)
     return flow;

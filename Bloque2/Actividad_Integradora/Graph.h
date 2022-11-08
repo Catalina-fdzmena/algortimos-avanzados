@@ -22,16 +22,16 @@ private:
   int end;
   // Lista de adyacencia -- MST
   // vector de listas de pares (vertice, peso)
-  std::vector<std::list<std::pair<int, int>>> adjList;
+  std::vector<std::list<std::pair<int, int> > > adjList;
   // Matriz de adyacencia  -- TSP
-  std::vector<std::vector<int>> adjMatrix;
+  std::vector<std::vector<int> > adjMatrix;
     
   void split(std::string line, std::vector<int> &res);
   void calculaCostoPosible(NodeBB &nodoActual);
 
   // Funciones para MaximumFlow
-  bool buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int>> &residualGraph);
-  int sendFlow(std::vector<std::vector<int>> &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow);
+  bool buildResidualGraph(std::vector<int> &levels, std::vector<std::vector<int> > &residualGraph);
+  int sendFlow(std::vector<std::vector<int> > &residualGraph, std::vector<int> levels, std::vector<int> &counts, int currentNode, int flow);
   
 public:
   Graph();
