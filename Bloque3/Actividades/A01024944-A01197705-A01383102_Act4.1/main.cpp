@@ -1,3 +1,25 @@
+/*
+** Integrantes:
+**    José Emilio Alvear Cantú - A01024944
+**    Andrea Catalina Fernández Mena - A01197705
+**    Carlos Milano - A01383102
+**
+** Referencias:
+**    Algoritmo obtenido de: https://www.youtube.com/watch?v=6u_hWxbOc7E
+**
+**
+----Instrucciones ----
+**
+** Compilacion para ejecucion:
+**    g++ -o main.exe main.cpp
+** Ejemplo de ejecucion:
+**    main.exe < TestCases\test01.txt > out01.txt  
+**    
+*/
+
+// Complejidad de tiempo: O(nlog(n))
+// Complejidad de espacio: O(nlog(n))
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -43,8 +65,6 @@ double calculateDistance(Punto a, Punto b) {
     return dist;
 }
 
-// Complejidad de tiempo: O(nlog(n))
-// Complejidad de espacio: O(nlog(n))
 double getClosestPairOfPoints(std::vector<Punto> sortedX, std::vector<Punto> sortedY) {
 
     int n = sortedX.size();
