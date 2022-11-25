@@ -26,7 +26,7 @@ using namespace std;
 
 vector<int> capTypes[105];
 vector<int> oneComb;
-vector<vector<int>> combinations; 
+vector<vector<int> > combinations; 
 int fullBit;
 
 int dp[1025][101];
